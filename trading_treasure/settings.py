@@ -29,6 +29,8 @@ ALLOWED_HOSTS = ["*"]
 
 AUTH_USER_MODEL = "site_app.User"
 
+LOGIN_REDIRECT_URL = "/profile"
+
 
 # Application definition
 

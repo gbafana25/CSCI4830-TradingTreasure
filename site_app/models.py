@@ -1,6 +1,7 @@
 from django.db import models
 import uuid
 from django.contrib.auth.models import AbstractUser
+from django.contrib import admin
 
 # Create your models here.
 
@@ -20,9 +21,17 @@ class User(AbstractUser):  # Extending Django's built-in user model
     phone_number = models.BigIntegerField(blank=True, null=True)
     address = models.ForeignKey(Address, on_delete=models.SET_NULL, null=True, blank=True)
 
-    def __str__(self):
-        return self.username
+    
+    list_display = ("id", "username", "email", "location", "phone_number")
+    fieldsets = [
+        (None, {"fields": ["id", "username", "email", "location", "phone_number"]}),
+        ("Personal info", {"fields": ["id", "username", "email", "location", "phone_number"]})
+    ]
 
+    def __str__(self):
+        if self.location == None or self.phone_number == None:
+            return self.username
+        return f"{self.username}, {self.email}, {self.location}, {str(self.phone_number)}"
 
 class Product(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)

@@ -1,0 +1,19 @@
+<h1>Temporary Home page</h1>
+<h2>Temp. landing page with all links, for testing purposes</h2>
+
+<form action="/" method="post">
+{% csrf_token %}
+<button type="submit">Home</button>
+</form>
+<form action="{% url 'login' %}?next={{ request.path }}" method="post">
+{% csrf_token %}
+<button type="submit">Login</button>
+</form>
+<form action="{% url 'signup' %}?next=/profile" method="post">
+{% csrf_token %}
+<button type="submit">Signup</button>
+</form>
+<form action="{% url 'profile' %}?next=/profile" method="post">
+{% csrf_token %}
+<button type="submit">Profile</button>
+</form>
