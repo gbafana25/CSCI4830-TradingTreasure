@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<title>Signup</title>
+
+<h1>Create an account</h1>
+{% if form.errors %}
+	{{ form.errors }}
+{% endif %}
+<form action="/signup" method="post" >
+	{% csrf_token %}
+	{{ form.as_p }}
+	<!--
+	<label for="username" >Username: </label><br>
+	<input  type="text" id="username" name="username" value="{{ username }}" required><br>
+	<label for="password" >Password: </label><br>
+	<input type="password" id="password" name="password" value="{{ password }}" required><br>
+	<label for="email" >Email: </label><br>
+	<input type="text" id="email" name="email" value="{{ email }}" required><br>
+    <label for="location">Location: </label><br>
+    <input type="text" id="location" name="location" value="{{ location }}" required><br>
+    <label for="location">Phone #: </label><br>
+    <input type="tel" id="phone_number" name="phone_number" value="{{ phone_number }}" required><br>
+	
+	-->
+	<div><button type="submit">Create account</button><br></div>
+</form>
