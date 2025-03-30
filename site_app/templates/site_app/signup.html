@@ -6,21 +6,27 @@
 {% if form.errors %}
 	{{ form.errors }}
 {% endif %}
-<form action="/signup" method="post" >
+<form action="{% url 'signup' %}?next=profile" method="post" >
 	{% csrf_token %}
-	{{ form.as_p }}
-	<!--
-	<label for="username" >Username: </label><br>
-	<input  type="text" id="username" name="username" value="{{ username }}" required><br>
-	<label for="password" >Password: </label><br>
-	<input type="password" id="password" name="password" value="{{ password }}" required><br>
-	<label for="email" >Email: </label><br>
-	<input type="text" id="email" name="email" value="{{ email }}" required><br>
-    <label for="location">Location: </label><br>
-    <input type="text" id="location" name="location" value="{{ location }}" required><br>
-    <label for="location">Phone #: </label><br>
-    <input type="tel" id="phone_number" name="phone_number" value="{{ phone_number }}" required><br>
-	
-	-->
+	<div>
+		<label for="username">Username</label>
+		<p id="username">{{ form.username }}</p>
+	</div>
+	<div>
+		<label for="password">Password</label>
+		<p id="password">{{ form.password }}</p>
+	</div>
+	<div>
+		<label for="email">Email</label>
+		<p id="email">{{ form.email }}</p>
+	</div>
+	<div>
+		<label for="location">Location</label>
+		<p id="location">{{ form.location }}</p>
+	</div>
+	<div>
+		<label for="phone_number">Phone Number</label>
+		<p id="phone_number">{{ form.phone_number }}</p>
+	</div>
 	<div><button type="submit">Create account</button><br></div>
 </form>
