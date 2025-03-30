@@ -31,7 +31,7 @@ class User(AbstractUser):  # Extending Django's built-in user model
     def __str__(self):
         if self.location == None or self.phone_number == None:
             return self.username
-        return f"{self.username}, {self.email}, {self.location}, {str(self.phone_number)}"
+        return f"{self.username}, {self.email}, {self.location}, {str(self.phone_number)}\n{self.address}"
 
 class Product(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
