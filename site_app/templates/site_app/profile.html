@@ -1,0 +1,31 @@
+<h2>User profile info</h2>
+<p>{{ profile }}</p>
+
+<h2>Update address</h2>
+{% if form.errors %}
+	{{ form.errors }}
+{% endif %}
+<form action="{% url 'update_address' %}?next=/profile" method="post" >
+	{% csrf_token %}
+    <div>
+        <label for="addr1">Address Line 1</label>
+        <p id="addr1">{{ form.address_line1 }}</p>
+    </div>
+    <div>
+        <label for="addr2">Address Line 2</label>
+        <p id="addr2">{{ form.address_line2 }}</p>
+    </div>
+    <div>
+        <label for="city">City</label>
+        <p id="city">{{ form.city }}</p>
+    </div>
+    <div>
+        <label for="state">State</label>
+        <p id="state">{{ form.state }}</p>
+    </div>
+    <div>
+        <label for="zipcode">Zip</label>
+        <p id="zipcode">{{ form.zip_code }}</p>
+    </div>
+	<div><button type="submit">Update Address</button><br></div>
+</form>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<title>Signup</title>
+
+<h1>Create an account</h1>
+{% if form.errors %}
+	{{ form.errors }}
+{% endif %}
+<form action="{% url 'signup' %}?next=profile" method="post" >
+	{% csrf_token %}
+	<div>
+		<label for="username">Username</label>
+		<p id="username">{{ form.username }}</p>
+	</div>
+	<div>
+		<label for="password">Password</label>
+		<p id="password">{{ form.password }}</p>
+	</div>
+	<div>
+		<label for="email">Email</label>
+		<p id="email">{{ form.email }}</p>
+	</div>
+	<div>
+		<label for="location">Location</label>
+		<p id="location">{{ form.location }}</p>
+	</div>
+	<div>
+		<label for="phone_number">Phone Number</label>
+		<p id="phone_number">{{ form.phone_number }}</p>
+	</div>
+	<div><button type="submit">Create account</button><br></div>
+</form>
