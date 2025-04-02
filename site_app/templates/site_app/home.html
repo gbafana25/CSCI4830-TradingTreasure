@@ -1,24 +1,80 @@
-<h1>Welcome to Tradining Treasures</h1>
-<h2>Created By: 
-    Gareth Moodley, 
-    Jackson Plozay, 
-    Brayden Moore, 
-    Nikolas Dimitrov, 
-    Esteven Valencia​</h2>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome Trading Treasure!!</title>
+    <style>
+      /* Global Styles */
+      body {
+        background-color: #D2B48C; /* Light brown background */
+        font-family: 'Arial', sans-serif; /* Professional font */
+        color: #333; /* Dark text for readability */
+        margin: 0;
+        padding: 0;
+        text-align: center;
+      }
 
-<form action="/" method="post">
-{% csrf_token %}
-<button type="submit">Home</button>
-</form>
-<form action="{% url 'login' %}?next={{ request.path }}" method="post">
-{% csrf_token %}
-<button type="submit">Login</button>
-</form>
-<form action="{% url 'signup' %}?next=/profile" method="post">
-{% csrf_token %}
-<button type="submit">Signup</button>
-</form>
-<form action="{% url 'profile' %}?next=/profile" method="post">
-{% csrf_token %}
-<button type="submit">Profile</button>
-</form>
+      h2 {
+        font-size: 24px;
+        color: #4B2C20; /* Slightly darker brown for heading */
+      }
+
+      p {
+        font-size: 18px;
+        color: #4B2C20;
+      }
+
+      /* Form Styling */
+      form {
+        margin-top: 20px;
+      }
+
+      button {
+        background-color: #C5A27A; /* Matches the light brown background */
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        margin: 10px;
+        border-radius: 5px; /* Rounded corners for buttons */
+      }
+
+      button:hover {
+        background-color: #A17D59; /* Slightly darker shade for hover effect */
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <h2>Created By: 
+        Gareth Moodley, 
+        Jackson Plozay, 
+        Brayden Moore, 
+        Nikolas Dimitrov, 
+        Esteven Valencia​</h2>
+    <p>Links Below:</p>
+    
+    <form action="/" method="post">
+      {% csrf_token %}
+      <button type="submit">Home</button>
+    </form>
+    
+    <form action="{% url 'login' %}?next={{ request.path }}" method="post">
+      {% csrf_token %}
+      <button type="submit">Login</button>
+    </form>
+    
+    <form action="{% url 'signup' %}?next=/profile" method="post">
+      {% csrf_token %}
+      <button type="submit">Signup</button>
+    </form>
+    
+    <form action="{% url 'profile' %}?next=/profile" method="post">
+      {% csrf_token %}
+      <button type="submit">Profile</button>
+    </form>
+  </body>
+</html>

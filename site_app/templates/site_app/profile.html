@@ -3,29 +3,32 @@
 
 <h2>Update address</h2>
 {% if form.errors %}
-	{{ form.errors }}
+    <div class="error">
+        {{ form.errors }}
+    </div>
 {% endif %}
-<form action="{% url 'update_address' %}?next=/profile" method="post" >
-	{% csrf_token %}
+
+<form action="{% url 'update_address' %}?next=/profile" method="post">
+    {% csrf_token %}
     <div>
         <label for="addr1">Address Line 1</label>
-        <p id="addr1">{{ form.address_line1 }}</p>
+        {{ form.address_line1 }}
     </div>
     <div>
         <label for="addr2">Address Line 2</label>
-        <p id="addr2">{{ form.address_line2 }}</p>
+        {{ form.address_line2 }}
     </div>
     <div>
         <label for="city">City</label>
-        <p id="city">{{ form.city }}</p>
+        {{ form.city }}
     </div>
     <div>
         <label for="state">State</label>
-        <p id="state">{{ form.state }}</p>
+        {{ form.state }}
     </div>
     <div>
-        <label for="zipcode">Zip</label>
-        <p id="zipcode">{{ form.zip_code }}</p>
+        <label for="zipcode">Zip Code</label>
+        {{ form.zip_code }}
     </div>
-	<div><button type="submit">Update Address</button><br></div>
+    <div><button type="submit">Update Address</button></div>
 </form>
