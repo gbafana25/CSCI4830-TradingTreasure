@@ -1,21 +1,44 @@
-<h2>User profile info</h2>
-<p>{{ profile }}</p>
+<h2>User Profile Information</h2>
 
-<h2>Update address</h2>
+<!-- Display user profile info -->
+<p><strong>Username:</strong> {{ profile.username }}</p>
+<p><strong>Email:</strong> {{ profile.email }}</p>
+<p><strong>Location:</strong> {{ profile.location }}</p>
+<p><strong>Phone Number:</strong> {{ profile.phone_number }}</p>
+
+{% if profile.address %}
+    <h3>Current Address</h3>
+    <p>{{ profile.address.address_line1 }}</p>
+    <p>{{ profile.address.address_line2 }}</p>
+    <p>{{ profile.address.city }}, {{ profile.address.state }} - {{ profile.address.zip_code }}</p>
+{% else %}
+    <p>No address available.</p>
+{% endif %}
+
+<h2>Update Address</h2>
+
+<!-- Display form errors, if any -->
 {% if form.errors %}
     <div class="error">
-        {{ form.errors }}
+        <ul>
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
     </div>
 {% endif %}
 
+<!-- Address update form -->
 <form action="{% url 'update_address' %}?next=/profile" method="post">
     {% csrf_token %}
     <div>
-        <label for="addr1">Address Line 1</label>
+        <label for="address_line1">Address Line 1</label>
         {{ form.address_line1 }}
     </div>
     <div>
-        <label for="addr2">Address Line 2</label>
+        <label for="address_line2">Address Line 2</label>
         {{ form.address_line2 }}
     </div>
     <div>
@@ -27,8 +50,10 @@
         {{ form.state }}
     </div>
     <div>
-        <label for="zipcode">Zip Code</label>
+        <label for="zip_code">Zip Code</label>
         {{ form.zip_code }}
     </div>
-    <div><button type="submit">Update Address</button></div>
+    <div>
+        <button type="submit">Update Address</button>
+    </div>
 </form>
