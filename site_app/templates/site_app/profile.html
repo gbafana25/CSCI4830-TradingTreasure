@@ -1,134 +1,136 @@
+<!-- product_list.html (modified with Add Product link) -->
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>User Profile Information</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
     <style>
-      /* Global Styles */
-      body {
-        background-color: #D2B48C; /* Light brown background */
-        font-family: 'Arial', sans-serif; /* Professional font */
-        color: #333; /* Dark text for readability */
-        margin: 0;
-        padding: 0;
-        text-align: center;
-      }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
 
-      h2 {
-        font-size: 24px;
-        color: #4B2C20; /* Slightly darker brown for heading */
-      }
+        h2 {
+            color: #333;
+            margin-top: 20px;
+        }
 
-      p {
-        font-size: 18px;
-        color: #4B2C20;
-      }
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
 
-      /* Form Styling */
-      form {
-        margin-top: 20px;
-      }
+        .product-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            width: 300px;
+            margin: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
 
-      button {
-        background-color: #C5A27A; /* Matches the light brown background */
-        border: none;
-        color: white;
-        padding: 10px 20px;
-        font-size: 16px;
-        cursor: pointer;
-        margin: 10px;
-        border-radius: 5px; /* Rounded corners for buttons */
-      }
+        .product-card h3 {
+            font-size: 20px;
+            color: #333;
+        }
 
-      button:hover {
-        background-color: #A17D59; /* Slightly darker shade for hover effect */
-      }
+        .product-card p {
+            font-size: 16px;
+            color: #666;
+        }
 
-      .error ul {
-        list-style-type: none;
-        color: red;
-      }
+        .product-card .price {
+            font-size: 18px;
+            color: #27ae60;
+            font-weight: bold;
+        }
 
-      label {
-        font-weight: bold;
-        display: block;
-        margin-top: 10px;
-      }
+        .product-card .category {
+            font-size: 14px;
+            color: #2980b9;
+        }
 
-      input, select {
-        padding: 8px;
-        font-size: 16px;
-        width: 100%;
-        margin-top: 5px;
-        margin-bottom: 10px;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-      }
+        .buy-button {
+            background-color: #27ae60;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .buy-button:hover {
+            background-color: #2ecc71;
+        }
+
+        .add-product-button {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 20px;
+            margin-top: 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .add-product-button:hover {
+            background-color: #2980b9;
+        }
+
+        .pagination {
+            margin-top: 20px;
+        }
 
     </style>
-  </head>
+</head>
+<body>
 
-  <body>
-    <h2>User Profile Information</h2>
+    <h2>Available Products</h2>
 
-    <!-- Display user profile info -->
-    <p><strong>Username:</strong> {{ profile.username }}</p>
-    <p><strong>Email:</strong> {{ profile.email }}</p>
-    <p><strong>Location:</strong> {{ profile.location }}</p>
-    <p><strong>Phone Number:</strong> {{ profile.phone_number }}</p>
+    <div class="product-list">
+        {% for product in page_obj %}
+            <div class="product-card">
+                <h3>{{ product.name }}</h3>
+                <p><strong>Category:</strong> {{ product.category }}</p>
+                <p class="price">$ {{ product.price }}</p>
+                <p class="category">Category: {{ product.category }}</p>
+                <a href="{% url 'buy_product' product.id %}" class="buy-button">Buy Now</a>
+            </div>
+        {% empty %}
+            <p>No products available at the moment.</p>
+        {% endfor %}
+    </div>
 
-    {% if profile.address %}
-        <h3>Current Address</h3>
-        <p>{{ profile.address.address_line1 }}</p>
-        <p>{{ profile.address.address_line2 }}</p>
-        <p>{{ profile.address.city }}, {{ profile.address.state }} - {{ profile.address.zip_code }}</p>
-    {% else %}
-        <p>No address available.</p>
-    {% endif %}
+    <!-- Pagination controls -->
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
 
-    <h2>Update Address</h2>
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
 
-    <!-- Display form errors, if any -->
-    {% if form.errors %}
-        <div class="error">
-            <ul>
-                {% for field in form %}
-                    {% for error in field.errors %}
-                        <li>{{ error }}</li>
-                    {% endfor %}
-                {% endfor %}
-            </ul>
-        </div>
-    {% endif %}
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
 
-    <!-- Address update form -->
-    <form action="{% url 'update_address' %}?next=/profile" method="post">
-        {% csrf_token %}
-        <div>
-            <label for="address_line1">Address Line 1</label>
-            {{ form.address_line1 }}
-        </div>
-        <div>
-            <label for="address_line2">Address Line 2</label>
-            {{ form.address_line2 }}
-        </div>
-        <div>
-            <label for="city">City</label>
-            {{ form.city }}
-        </div>
-        <div>
-            <label for="state">State</label>
-            {{ form.state }}
-        </div>
-        <div>
-            <label for="zip_code">Zip Code</label>
-            {{ form.zip_code }}
-        </div>
-        <div>
-            <button type="submit">Update Address</button>
-        </div>
-    </form>
+    <!-- Add Product button -->
+    <a href="{% url 'add_product' %}" class="add-product-button">Add New Product</a>
 
-  </body>
+</body>
 </html>
