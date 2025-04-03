@@ -1,6 +1,12 @@
 from django import forms
+from .models import Item
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
+
+class ItemForm(forms.ModelForm):
+    class Meta:
+        model = Item
+        fields = ['name', 'description', 'price']
 
 class SignupForm(forms.Form):
     username = forms.CharField()
