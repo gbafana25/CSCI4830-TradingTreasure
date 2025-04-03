@@ -1,53 +1,94 @@
+<!-- product_list.html -->
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Items</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
     <style>
-      /* Global Styles */
-      body {
-        background-color: #D2B48C; /* Light brown background */
-        font-family: 'Arial', sans-serif; /* Professional font */
-        color: #333; /* Dark text for readability */
-        margin: 0;
-        padding: 0;
-        text-align: center;
-      }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
 
-      h2 {
-        font-size: 24px;
-        color: #4B2C20; /* Slightly darker brown for heading */
-      }
+        h2 {
+            color: #333;
+            margin-top: 20px;
+        }
 
-      p {
-        font-size: 18px;
-        color: #4B2C20;
-      }
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
 
-      /* Form Styling */
-      form {
-        margin-top: 20px;
-      }
+        .product-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            width: 300px;
+            margin: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
 
-      button {
-        background-color: #C5A27A; /* Matches the light brown background */
-        border: none;
-        color: white;
-        padding: 10px 20px;
-        font-size: 16px;
-        cursor: pointer;
-        margin: 10px;
-        border-radius: 5px; /* Rounded corners for buttons */
-      }
+        .product-card h3 {
+            font-size: 20px;
+            color: #333;
+        }
 
-      button:hover {
-        background-color: #A17D59; /* Slightly darker shade for hover effect */
-      }
+        .product-card p {
+            font-size: 16px;
+            color: #666;
+        }
 
+        .product-card .price {
+            font-size: 18px;
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .product-card .category {
+            font-size: 14px;
+            color: #2980b9;
+        }
+
+        .buy-button {
+            background-color: #27ae60;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .buy-button:hover {
+            background-color: #2ecc71;
+        }
     </style>
-  </head>
+</head>
+<body>
 
-  <body>
-  </body>
+    <h2>Available Products</h2>
+
+    <div class="product-list">
+        {% for product in products %}
+            <div class="product-card">
+                <h3>{{ product.name }}</h3>
+                <p><strong>Category:</strong> {{ product.category }}</p>
+                <p class="price">$ {{ product.price }}</p>
+                <p class="category">Category: {{ product.category }}</p>
+                <a href="{% url 'buy_product' product.id %}" class="buy-button">Buy Now</a>
+            </div>
+        {% empty %}
+            <p>No products available at the moment.</p>
+        {% endfor %}
+    </div>
+
+</body>
 </html>

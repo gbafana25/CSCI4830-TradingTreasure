@@ -51,3 +51,22 @@ def home(request):
 
 def Item(request):
     return render(request, 'site_app/items.html', {})
+
+def add_product(request):
+    # Handle the form for adding a new product
+    if request.method == "POST":
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            new_product = form.save(commit=False)
+            new_product.owner = request.user  # Set the current user as the product owner
+            new_product.save()
+            return redirect('product_list')  # Redirect to the product list after saving
+    else:
+        form = ProductForm()
+
+    return render(request, 'add_product.html', {'form': form})
+
+def product_list(request):
+    # Fetch all products from the database
+    products = Product.objects.filter(is_bought=False)  # Filter out the bought ones if you want to show only available products
+    return render(request, 'product_list.html', {'products': products})
