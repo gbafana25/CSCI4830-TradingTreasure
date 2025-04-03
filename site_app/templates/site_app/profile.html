@@ -1,59 +1,134 @@
-<h2>User Profile Information</h2>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Profile Information</title>
+    <style>
+      /* Global Styles */
+      body {
+        background-color: #D2B48C; /* Light brown background */
+        font-family: 'Arial', sans-serif; /* Professional font */
+        color: #333; /* Dark text for readability */
+        margin: 0;
+        padding: 0;
+        text-align: center;
+      }
 
-<!-- Display user profile info -->
-<p><strong>Username:</strong> {{ profile.username }}</p>
-<p><strong>Email:</strong> {{ profile.email }}</p>
-<p><strong>Location:</strong> {{ profile.location }}</p>
-<p><strong>Phone Number:</strong> {{ profile.phone_number }}</p>
+      h2 {
+        font-size: 24px;
+        color: #4B2C20; /* Slightly darker brown for heading */
+      }
 
-{% if profile.address %}
-    <h3>Current Address</h3>
-    <p>{{ profile.address.address_line1 }}</p>
-    <p>{{ profile.address.address_line2 }}</p>
-    <p>{{ profile.address.city }}, {{ profile.address.state }} - {{ profile.address.zip_code }}</p>
-{% else %}
-    <p>No address available.</p>
-{% endif %}
+      p {
+        font-size: 18px;
+        color: #4B2C20;
+      }
 
-<h2>Update Address</h2>
+      /* Form Styling */
+      form {
+        margin-top: 20px;
+      }
 
-<!-- Display form errors, if any -->
-{% if form.errors %}
-    <div class="error">
-        <ul>
-            {% for field in form %}
-                {% for error in field.errors %}
-                    <li>{{ error }}</li>
+      button {
+        background-color: #C5A27A; /* Matches the light brown background */
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        margin: 10px;
+        border-radius: 5px; /* Rounded corners for buttons */
+      }
+
+      button:hover {
+        background-color: #A17D59; /* Slightly darker shade for hover effect */
+      }
+
+      .error ul {
+        list-style-type: none;
+        color: red;
+      }
+
+      label {
+        font-weight: bold;
+        display: block;
+        margin-top: 10px;
+      }
+
+      input, select {
+        padding: 8px;
+        font-size: 16px;
+        width: 100%;
+        margin-top: 5px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <h2>User Profile Information</h2>
+
+    <!-- Display user profile info -->
+    <p><strong>Username:</strong> {{ profile.username }}</p>
+    <p><strong>Email:</strong> {{ profile.email }}</p>
+    <p><strong>Location:</strong> {{ profile.location }}</p>
+    <p><strong>Phone Number:</strong> {{ profile.phone_number }}</p>
+
+    {% if profile.address %}
+        <h3>Current Address</h3>
+        <p>{{ profile.address.address_line1 }}</p>
+        <p>{{ profile.address.address_line2 }}</p>
+        <p>{{ profile.address.city }}, {{ profile.address.state }} - {{ profile.address.zip_code }}</p>
+    {% else %}
+        <p>No address available.</p>
+    {% endif %}
+
+    <h2>Update Address</h2>
+
+    <!-- Display form errors, if any -->
+    {% if form.errors %}
+        <div class="error">
+            <ul>
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
                 {% endfor %}
-            {% endfor %}
-        </ul>
-    </div>
-{% endif %}
+            </ul>
+        </div>
+    {% endif %}
 
-<!-- Address update form -->
-<form action="{% url 'update_address' %}?next=/profile" method="post">
-    {% csrf_token %}
-    <div>
-        <label for="address_line1">Address Line 1</label>
-        {{ form.address_line1 }}
-    </div>
-    <div>
-        <label for="address_line2">Address Line 2</label>
-        {{ form.address_line2 }}
-    </div>
-    <div>
-        <label for="city">City</label>
-        {{ form.city }}
-    </div>
-    <div>
-        <label for="state">State</label>
-        {{ form.state }}
-    </div>
-    <div>
-        <label for="zip_code">Zip Code</label>
-        {{ form.zip_code }}
-    </div>
-    <div>
-        <button type="submit">Update Address</button>
-    </div>
-</form>
+    <!-- Address update form -->
+    <form action="{% url 'update_address' %}?next=/profile" method="post">
+        {% csrf_token %}
+        <div>
+            <label for="address_line1">Address Line 1</label>
+            {{ form.address_line1 }}
+        </div>
+        <div>
+            <label for="address_line2">Address Line 2</label>
+            {{ form.address_line2 }}
+        </div>
+        <div>
+            <label for="city">City</label>
+            {{ form.city }}
+        </div>
+        <div>
+            <label for="state">State</label>
+            {{ form.state }}
+        </div>
+        <div>
+            <label for="zip_code">Zip Code</label>
+            {{ form.zip_code }}
+        </div>
+        <div>
+            <button type="submit">Update Address</button>
+        </div>
+    </form>
+
+  </body>
+</html>
