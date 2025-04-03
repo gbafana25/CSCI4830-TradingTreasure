@@ -69,4 +69,4 @@ def add_product(request):
 def product_list(request):
     # Fetch all products from the database
     products = Product.objects.filter(is_bought=False)  # Filter out the bought ones if you want to show only available products
-    return render(request, 'product_list.html', {'products': products})
+    return render(request, 'items.html', {'products': products})
