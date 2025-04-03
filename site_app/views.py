@@ -48,3 +48,6 @@ def update_address(request):
 
 def home(request):
     return render(request, 'site_app/home.html', {})
+
+def Item(request):
+    return render(request, 'site_app/items.html', {})
