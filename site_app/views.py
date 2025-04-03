@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .forms import SignupForm, AddressForm
-from .models import User, Address
+from .forms import SignupForm, AddressForm, ProductForm
+from .models import User, Address, Product
 from django.http import HttpResponse
 
 from django.contrib.auth.decorators import login_required
@@ -64,9 +64,9 @@ def add_product(request):
     else:
         form = ProductForm()
 
-    return render(request, 'add_product.html', {'form': form})
+    return render(request, 'site_app/add_product.html', {'form': form})
 
 def product_list(request):
     # Fetch all products from the database
     products = Product.objects.filter(is_bought=False)  # Filtder out the bought ones if you want to show only available products
-    return render(request, 'items.html', {'products': products})
+    return render(request, 'site_app/items.html', {'products': products})
