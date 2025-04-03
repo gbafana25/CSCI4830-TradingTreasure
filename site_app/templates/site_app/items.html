@@ -1,4 +1,4 @@
-<!-- product_list.html (modified with Add Product link) -->
+<!-- product_list.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -70,26 +70,6 @@
         .buy-button:hover {
             background-color: #2ecc71;
         }
-
-        .add-product-button {
-            background-color: #3498db;
-            color: white;
-            padding: 12px 20px;
-            margin-top: 30px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-        }
-
-        .add-product-button:hover {
-            background-color: #2980b9;
-        }
-
-        .pagination {
-            margin-top: 20px;
-        }
-
     </style>
 </head>
 <body>
@@ -97,7 +77,7 @@
     <h2>Available Products</h2>
 
     <div class="product-list">
-        {% for product in page_obj %}
+        {% for product in products %}
             <div class="product-card">
                 <h3>{{ product.name }}</h3>
                 <p><strong>Category:</strong> {{ product.category }}</p>
@@ -109,28 +89,6 @@
             <p>No products available at the moment.</p>
         {% endfor %}
     </div>
-
-    <!-- Pagination controls -->
-    <div class="pagination">
-        <span class="step-links">
-            {% if page_obj.has_previous %}
-                <a href="?page=1">&laquo; first</a>
-                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-            {% endif %}
-
-            <span class="current">
-                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-            </span>
-
-            {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}">next</a>
-                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-            {% endif %}
-        </span>
-    </div>
-
-    <!-- Add Product button -->
-    <a href="{% url 'add_product' %}" class="add-product-button">Add New Product</a>
 
 </body>
 </html>

@@ -1,9 +1,8 @@
 from django.shortcuts import render, redirect
-from .forms import ItemForm
-from .models import Item
+from .forms import SignupForm, AddressForm, ProductForm
+from .models import User, Address, Product
 from django.shortcuts import get_object_or_404, redirect
-from .forms import SignupForm, AddressForm
-from .models import User, Address
+
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
@@ -83,3 +82,25 @@ def update_address(request):
 
 def home(request):
     return render(request, 'site_app/home.html', {})
+
+def Item(request):
+    return render(request, 'site_app/items.html', {})
+
+def add_product(request):
+    # Handle the form for adding a new product
+    if request.method == "POST":
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            new_product = form.save(commit=False)
+            new_product.owner = request.user  # Set the current user as the product owner
+            new_product.save()
+            return redirect('product_list')  # Redirect to the product list after saving
+    else:
+        form = ProductForm()
+
+    return render(request, 'site_app/add_product.html', {'form': form})
+
+def product_list(request):
+    # Fetch all products from the database
+    products = Product.objects.filter(is_bought=False)  # Filtder out the bought ones if you want to show only available products
+    return render(request, 'site_app/items.html', {'products': products})
