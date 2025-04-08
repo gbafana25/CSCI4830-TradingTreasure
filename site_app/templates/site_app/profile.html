@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 <!-- product_list.html (modified with Add Product link) -->
 <!DOCTYPE html>
 <html lang="en">
@@ -134,3 +135,40 @@
 
 </body>
 </html>
+=======
+{% load static %}
+<h2>User profile info</h2>
+<p>{{ profile }}</p>
+
+<h2>Update address</h2>
+{% if form.errors %}
+    <div class="error">
+        {{ form.errors }}
+    </div>
+{% endif %}
+
+<form action="{% url 'update_address' %}?next=/profile" method="post">
+    {% csrf_token %}
+    <div>
+        <label for="addr1">Address Line 1</label>
+        {{ form.address_line1 }}
+    </div>
+    <div>
+        <label for="addr2">Address Line 2</label>
+        {{ form.address_line2 }}
+    </div>
+    <div>
+        <label for="city">City</label>
+        {{ form.city }}
+    </div>
+    <div>
+        <label for="state">State</label>
+        {{ form.state }}
+    </div>
+    <div>
+        <label for="zipcode">Zip Code</label>
+        {{ form.zip_code }}
+    </div>
+    <div><button type="submit">Update Address</button></div>
+</form>
+>>>>>>> Stashed changes

@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
+<<<<<<< Updated upstream
 from site_app import views
 
 urlpatterns = [
@@ -9,3 +10,10 @@ urlpatterns = [
     path('item/<int:pk>/edit/', views.update_item, name='update_item'),
     path('item/<int:pk>/delete/', views.delete_item, name='delete_item')
 ]
+=======
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('site_app.urls'))
+]
+>>>>>>> Stashed changes

@@ -1,4 +1,5 @@
 from django import forms
+<<<<<<< Updated upstream
 from .models import Item
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
@@ -8,6 +9,10 @@ class ItemForm(forms.ModelForm):
     class Meta:
         model = Item
         fields = ['name', 'description', 'price']
+=======
+from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import UserCreationForm
+>>>>>>> Stashed changes
 
 class SignupForm(forms.Form):
     username = forms.CharField()
@@ -26,9 +31,13 @@ class AddressForm(forms.Form):
         
 class LoginForm(forms.Form):
     username = forms.CharField()
+<<<<<<< Updated upstream
     password = forms.CharField()
 
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = ['name', 'price', 'category']  # You can customize the fields as needed
+=======
+    password = forms.CharField()
+>>>>>>> Stashed changes
