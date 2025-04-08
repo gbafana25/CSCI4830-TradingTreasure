@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+<<<<<<< Updated upstream
 from .forms import SignupForm, AddressForm, ProductForm
 from .models import User, Address, Product
 from django.shortcuts import get_object_or_404, redirect
@@ -41,6 +42,16 @@ def delete_item(request, pk):
         return redirect('item_list')
     return render(request, 'items/item_confirm_delete.html', {'item': item})
 
+=======
+from .forms import SignupForm, AddressForm
+from .models import User, Address
+from django.http import HttpResponse
+
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login
+
+# Create your views here.
+>>>>>>> Stashed changes
 def signup(request):
     if request.method == 'POST':
         signupform = SignupForm(request.POST)
@@ -81,6 +92,7 @@ def update_address(request):
     return render(request, 'site_app/profile.html', {'profile': u, 'form': addr_form})
 
 def home(request):
+<<<<<<< Updated upstream
     return render(request, 'site_app/home.html', {})
 
 def Item(request):
@@ -104,3 +116,26 @@ def product_list(request):
     # Fetch all products from the database
     products = Product.objects.filter(is_bought=False)  # Filtder out the bought ones if you want to show only available products
     return render(request, 'site_app/items.html', {'products': products})
+=======
+    #buy page
+
+
+
+    return render(request, 'site_app/index.html', {})
+
+def page2(request):
+    #sell page
+    #generic.html
+
+
+
+    return render(request, 'site_app/generic.html', {})
+
+def page3(request):
+    #accounts page
+    #elements.html
+
+
+
+    return render(request, 'site_app/elements.html', {})
+>>>>>>> Stashed changes
