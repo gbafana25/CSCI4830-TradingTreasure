@@ -1,0 +1,144 @@
+{% load static %}
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Trading Treasure: Account</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href={% static "assets/css/main.css" %} />
+		<noscript><link rel="stylesheet" href= {% static "assets/css/noscript.css" %}  /></noscript>
+
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<a href="{% url 'page3' %}" class="logo">Account</a>
+					</header>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li>				<a href= "{% url 'home' %}" >Buy here</a></li>
+							<li>				<a href= "{% url 'page2' %}" >Sell here</a></li>
+							<li class="active"><a href= "{% url 'page3' %}" >Accounts</a></li>
+						</ul>
+						<ul class="icons">
+							<li><a href= "{% url 'profile' %}" class="fa fa-user fa-lg"><span class="label"></span></a></li>
+							<li><a href="https://github.com/gbafana25/CSCI4830-TradingTreasure.git" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+				<div id="main">
+					<section>
+						<h2>User Account Information</h2>
+
+						{% if user.is_authenticated %}
+							<div>
+								<p><strong>Username:</strong> {{ user.username }}</p>
+								<p><strong>Email:</strong> {{ user.email }}</p>
+								<p><strong>Location:</strong> {{ user.location }}</p>
+								<p><strong>Phone Number:</strong> {{ user.phone_number }}</p>
+
+								{% if user.address %}
+									<p><strong>Address:</strong> {{ user.address.address_line1 }}, {{ user.address.city }}, {{ user.address.state }} {{ user.address.zip_code }}</p>
+								{% else %}
+									<p><strong>Address:</strong> Not available</p>
+								{% endif %}
+							</div>
+							<!-- Update Address Button -->
+							<a href="{% url 'update_address' %}">
+								<button type="button">Update Address</button>
+							</a>
+							<!-- Logout Button -->
+							<form method="POST" action="{% url 'logout' %}">
+								{% csrf_token %}
+								<button type="submit">Logout</button>
+							</form>
+						{% else %}
+							<p>You are not logged in. 
+								<a href="{% url 'login' %}"> <button type="button">Login Here</button></a>.</p>
+							<p>Or Create an account here if you don't have one.
+								 <a href="/signup"><button type="button">Create account</button></a>.</p>
+						{% endif %}
+							</section>
+							
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<section>
+							<form method="post" action="#">
+								<div class="fields">
+									<div class="field">
+										<label for="name">Name</label>
+										<input type="text" name="name" id="name" />
+									</div>
+									<div class="field">
+										<label for="email">Email</label>
+										<input type="text" name="email" id="email" />
+									</div>
+									<div class="field">
+										<label for="message">Message</label>
+										<textarea name="message" id="message" rows="3"></textarea>
+									</div>
+								</div>
+								<ul class="actions">
+									<li><input type="submit" value="Send Message" /></li>
+								</ul>
+							</form>
+						</section>
+						<section class="split contact">
+							<section class="alt">
+								<h3>Address</h3>
+								<p>1234 Somewhere Road #87257<br />
+								Nashville, TN 00000-0000</p>
+							</section>
+							<section>
+								<h3>Phone</h3>
+								<p><a href="#">(000) 000-0000</a></p>
+							</section>
+							<section>
+								<h3>Email</h3>
+								<p><a href="#">info@untitled.tld</a></p>
+							</section>
+							<section>
+								<h3>Social</h3>
+								<ul class="icons alt">
+									<li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+									<li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+									<li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+									<li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+								</ul>
+							</section>
+						</section>
+					</footer>
+
+				<!-- Copyright -->
+					<div id="copyright">
+						<ul><li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src= {% static "assets/js/jquery.min.js" %} ></script>
+			<script src= {% static "assets/js/jquery.scrollex.min.js" %} ></script>
+			<script src= {% static "assets/js/jquery.scrolly.min.js" %} ></script>
+			<script src= {% static "assets/js/browser.min.js" %} ></script>
+			<script src= {% static "assets/js/breakpoints.min.js" %} ></script>
+			<script src= {% static "assets/js/util.js" %} ></script>
+			<script src= {% static "assets/js/main.js" %} ></script>
+
+	</body>
+</html>

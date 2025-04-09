@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Trading Treasure: Sell</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href= {% static 'assets/css/main.css' %} />
+		<noscript><link rel="stylesheet" href= {% static "assets/css/noscript.css" %} /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<a href="{% url 'page2' %}" class="logo">Sell</a>
+					</header>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li>				<a href= "{% url 'home' %}" >Buy here</a></li>
+							<li class="active"><a href= "{% url 'page2' %}">Sell here</a></li>
+							<li>				<a href= "{% url 'page3' %}" >Accounts</a></li>
+						</ul>
+						<ul class="icons">
+							<li><a href= "{% url 'profile' %}" class="fa fa-user fa-lg"><span class="label"></span></a></li>
+							<li><a href="https://github.com/gbafana25/CSCI4830-TradingTreasure.git" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+							<section>
+								<h2>Sell Items</h2>
+								{% if user.is_authenticated %}
+								<!-- Form for authenticated users -->
+								<form method="post" action="#">
+									{% csrf_token %}
+                            <div class="fields">
+                                <div class="field">
+                                    <label for="name">Product Name</label>
+                                    <input type="text" name="name" id="name" required />
+                                </div>
+
+                                <div class="field">
+                                    <label for="price">Price</label>
+                                    <input type="number" name="price" id="price" step="0.01" required />
+                                </div>
+
+                                <div class="field">
+                                    <label for="category">Category</label>
+                                    <input type="text" name="category" id="category" required placeholder="Enter categories separated by semicolons" />
+                                </div>
+
+								<div class="field">
+                                    <label for="buyer_address">Buyer Address</label>
+                                    {% if user.address %}
+                                        <input type="text" name="buyer_address" id="buyer_address" value="{{ user.address.address_line1 }}, {{ user.address.city }}, {{ user.address.state }} {{ user.address.zip_code }}" readonly />
+                                    {% else %}
+                                        <p>No address available. Please update your address <a href="{% url 'profile' %}">here</a>.</p>
+                                    {% endif %}
+                                </div>
+
+                                <div class="field">
+                                    <label for="is_bought">Is Bought</label>
+                                    <input type="checkbox" name="is_bought" id="is_bought" />
+                                </div>
+
+                            </div>
+                            <ul class="actions">
+                                <li><input type="submit" value="Add Product" /></li>
+                            </ul>
+								</form>
+								{% else %}
+								<!-- Message for users who are not logged in -->
+								<p>You must be logged in to sell items.
+									<a href="{% url 'login' %}"> <button type="button">Login Here</button></a>.</p>
+							<p>Or Create an account here if you don't have one.
+								 <a href="/signup"><button type="button">Create account</button></a>.</p>								{% endif %}
+						</section>
+					</div>
+
+				<!-- Copyright -->
+					<div id="copyright">
+						<ul><li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src= {% static "assets/js/jquery.min.js" %}></script>
+			<script src= {% static "assets/js/jquery.scrollex.min.js" %}></script>
+			<script src= {% static "assets/js/jquery.scrolly.min.js" %}></script>
+			<script src= {% static "assets/js/browser.min.js" %}></script>
+			<script src= {% static "assets/js/breakpoints.min.js" %}></script>
+			<script src= {% static "assets/js/util.js" %}></script>
+			<script src= {% static "assets/js/main.js" %}></script>
+
+	</body>
+</html>
