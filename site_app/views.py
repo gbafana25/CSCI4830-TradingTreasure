@@ -30,7 +30,8 @@ def signup(request):
 def profile(request):
     u = request.user
     addr_form = AddressForm()
-    return render(request, 'site_app/profile.html', {'profile': u, 'form': addr_form})
+    return render(request, 'site_app/elements.html', {'profile': u, 'form': addr_form})
+
 
 @login_required
 def update_address(request):
@@ -44,7 +45,7 @@ def update_address(request):
     else:
         addr_form = AddressForm()
 
-    return render(request, 'site_app/index.html', {'profile': u, 'form': addr_form})
+    return render(request, 'site_app/profile.html', {'profile': u, 'form': addr_form})
 
 def home(request):
     #buy page
@@ -68,25 +69,3 @@ def page3(request):
 
 
     return render(request, 'site_app/elements.html', {})
-
-@login_required
-def add_product(request):
-    if request.method == 'POST':
-        name = request.POST.get('name')
-        price = request.POST.get('price')
-        category = request.POST.get('category')
-        buyer_address_id = request.POST.get('buyer_address')
-        is_bought = request.POST.get('is_bought') == 'on'
-
-        # Save the product
-        product = Product.objects.create(
-            name=name,
-            price=price,
-            category=category,
-            owner=request.user,
-            buyer_address_id=buyer_address_id if buyer_address_id else None,
-            is_bought=is_bought
-        )
-        return redirect('product_list')  # Redirect to a list or another page after success
-
-    return render(request, 'add_product.html')
