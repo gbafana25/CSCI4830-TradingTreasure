@@ -20,3 +20,11 @@ class AddressForm(forms.Form):
 class LoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField()
+
+class ProductForm(forms.ModelForm):
+   
+    fields = ['name', 'price', 'category', 'owner', 'buyer_address', 'is_bought']
+    widgets = {
+        'category': forms.Textarea(attrs={'placeholder': 'Enter categories separated by semicolons'}),
+        }
+
