@@ -43,23 +43,41 @@
 								{% if user.is_authenticated %}
 								<!-- Form for authenticated users -->
 								<form method="post" action="#">
-									<div class="fields">
-										<div class="field">
-											<label for="name">Item I.D.</label>
-											<input type="text" name="name" id="name" />
-										</div>
-										<div class="field">
-											<label for="email">Email</label>
-											<input type="text" name="email" id="email" />
-										</div>
-										<div class="field">
-											<label for="message">Description</label>
-											<textarea name="message" id="message" rows="3"></textarea>
-										</div>
-									</div>
-									<ul class="actions">
-										<li><input type="submit" value="List Item" /></li>
-									</ul>
+									{% csrf_token %}
+                            <div class="fields">
+                                <div class="field">
+                                    <label for="name">Product Name</label>
+                                    <input type="text" name="name" id="name" required />
+                                </div>
+
+                                <div class="field">
+                                    <label for="price">Price</label>
+                                    <input type="number" name="price" id="price" step="0.01" required />
+                                </div>
+
+                                <div class="field">
+                                    <label for="category">Category</label>
+                                    <input type="text" name="category" id="category" required placeholder="Enter categories separated by semicolons" />
+                                </div>
+
+								<div class="field">
+                                    <label for="buyer_address">Buyer Address</label>
+                                    {% if user.address %}
+                                        <input type="text" name="buyer_address" id="buyer_address" value="{{ user.address.address_line1 }}, {{ user.address.city }}, {{ user.address.state }} {{ user.address.zip_code }}" readonly />
+                                    {% else %}
+                                        <p>No address available. Please update your address <a href="{% url 'profile' %}">here</a>.</p>
+                                    {% endif %}
+                                </div>
+
+                                <div class="field">
+                                    <label for="is_bought">Is Bought</label>
+                                    <input type="checkbox" name="is_bought" id="is_bought" />
+                                </div>
+
+                            </div>
+                            <ul class="actions">
+                                <li><input type="submit" value="Add Product" /></li>
+                            </ul>
 								</form>
 								{% else %}
 								<!-- Message for users who are not logged in -->
