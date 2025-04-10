@@ -21,10 +21,15 @@ class LoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField()
 
-class ProductForm(forms.ModelForm):
+class ProductForm(forms.Form):
+    name = forms.CharField()
+    price = forms.FloatField()
+    category = forms.CharField()
+    buyer_address = forms.CharField()
    
-    fields = ['name', 'price', 'category', 'owner', 'buyer_address', 'is_bought']
-    widgets = {
-        'category': forms.Textarea(attrs={'placeholder': 'Enter categories separated by semicolons'}),
-        }
+    
+    #fields = ['name', 'price', 'category', 'owner', 'buyer_address', 'is_bought']
+    #widgets = {
+    #    'category': forms.Textarea(attrs={'placeholder': 'Enter categories separated by semicolons'}),
+    #    }
 

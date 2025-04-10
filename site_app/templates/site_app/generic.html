@@ -42,22 +42,25 @@
 								<h2>Sell Items</h2>
 								{% if user.is_authenticated %}
 								<!-- Form for authenticated users -->
-								<form method="post" action="#">
+								<form method="post" action="{% url 'page2' %}">
 									{% csrf_token %}
                             <div class="fields">
                                 <div class="field">
                                     <label for="name">Product Name</label>
-                                    <input type="text" name="name" id="name" required />
+									{{ form.name }}
+                                    <!--<input type="text" name="name" id="name" value="{{ form.name }}" required />-->
                                 </div>
 
                                 <div class="field">
                                     <label for="price">Price</label>
-                                    <input type="number" name="price" id="price" step="0.01" required />
+									{{ form.price }}
+                                    <!--<input type="number" name="price" id="price" step="0.01" value="{{ form.price }}" required />-->
                                 </div>
 
                                 <div class="field">
                                     <label for="category">Category</label>
-                                    <input type="text" name="category" id="category" required placeholder="Enter categories separated by semicolons" />
+									{{ form.category }}
+									<!--<input type="text" name="category" id="category" value="{{ form.category }}" required placeholder="Enter categories separated by semicolons" />-->
                                 </div>
 
 								<div class="field">
