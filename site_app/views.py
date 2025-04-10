@@ -1,10 +1,13 @@
 from django.shortcuts import render, redirect
-from .forms import SignupForm, AddressForm
-from .models import User, Address
+from .forms import SignupForm, AddressForm, ProductForm
+from .models import User, Address, Product
 from django.http import HttpResponse
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
+
+import logging
+log = logging.getLogger(__name__)
 
 # Create your views here.
 def signup(request):
@@ -49,18 +52,31 @@ def update_address(request):
 
 def home(request):
     #buy page
+    products = Product.objects.filter(is_bought=False)
+    product_list = []
+    for p in products:
+        product_list.append(p)
 
 
-
-    return render(request, 'site_app/index.html', {})
+    return render(request, 'site_app/index.html', {'products': product_list})
 
 def page2(request):
     #sell page
     #generic.html
-
-
-
-    return render(request, 'site_app/generic.html', {})
+    if request.method == 'POST':
+        product_form = ProductForm(request.POST)
+        log.debug(product_form)
+        if product_form.is_valid():
+            # right now just using the first line of the address to fetch the Address database object
+            # Product buyer_address must be the database object
+            line1 = product_form.cleaned_data['buyer_address'].split(',')[0]
+            addr = Address.objects.get(address_line1=line1)
+            p = Product(name=product_form.cleaned_data['name'], price=product_form.cleaned_data['price'], category=product_form.cleaned_data['category'], owner=request.user, buyer_address=addr, is_bought=False)
+            p.save()
+            redirect('/')
+    else:
+        product_form = ProductForm()
+    return render(request, 'site_app/generic.html', {'form': product_form})
 
 def page3(request):
     #accounts page
