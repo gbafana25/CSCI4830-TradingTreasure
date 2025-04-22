@@ -1,0 +1,13 @@
+[Unit]
+Description=gunicorn daemon
+Requires=gunicorn.socket
+After=network.target
+
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/home/ubuntu/prod_app
+ExecStart=/home/ubuntu/prod_app/env/bin/gunicorn --workers 3 --bind unix:/run/gunicorn.sock trading_treasure.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
