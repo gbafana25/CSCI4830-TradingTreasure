@@ -91,15 +91,21 @@
 						<!-- Footer -->
 							<footer>
 								<div class="pagination">
-									<!--<a href="#" class="previous">Prev</a>-->
-									<a href="#" class="page active">1</a>
-									<a href="#" class="page">2</a>
-									<a href="#" class="page">3</a>
-									<span class="extra">&hellip;</span>
-									<a href="#" class="page">8</a>
-									<a href="#" class="page">9</a>
-									<a href="#" class="page">10</a>
-									<a href="#" class="next">Next</a>
+    									{% if page_obj.has_previous %}
+        									<a href="?page={{ page_obj.previous_page_number }}" class="previous">Previous</a>
+    									{% endif %}
+
+    									{% for num in page_obj.paginator.page_range %}
+        									{% if page_obj.number == num %}
+            										<a href="?page={{ num }}" class="page active">{{ num }}</a>
+        									{% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+            										<a href="?page={{ num }}" class="page">{{ num }}</a>
+        									{% endif %}
+    									{% endfor %}
+
+    									{% if page_obj.has_next %}
+        									<a href="?page={{ page_obj.next_page_number }}" class="next">Next</a>
+    									{% endif %}
 								</div>
 							</footer>
 
