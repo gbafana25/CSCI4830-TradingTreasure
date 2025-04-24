@@ -32,6 +32,8 @@ AUTH_USER_MODEL = "site_app.User"
 
 LOGIN_REDIRECT_URL = "/profile"
 
+LOGOUT_REDIRECT_URL = "/"
+
 LOGGING = {
     "version": 1,  # the dictConfig format version
     "disable_existing_loggers": False,  # retain the default loggers
