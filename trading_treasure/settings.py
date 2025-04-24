@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ["*"]
 AUTH_USER_MODEL = "site_app.User"
 
 LOGIN_REDIRECT_URL = "/profile"
+LOGOUT_REDIRECT_URL = "/"
 
 LOGOUT_REDIRECT_URL = "/"
 
@@ -141,8 +142,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 #STATIC_ROOT = BASE_DIR / 'mystaticfiles'
-STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'productionfiles'
+STATIC_URL = '/static/'
+STATIC_ROOT = '/home/ubuntu/prod_app/productionfiles'
+#STATIC_ROOT = '/var/www/prod_app/static'
 #STATICFILES_DIRS = [os.path.join(BASE_DIR, 'TT2/site_app/static-remove')]
 #STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 
