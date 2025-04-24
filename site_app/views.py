@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import SignupForm, AddressForm, ProductForm
 from .models import User, Address, Product
 from django.http import HttpResponse
+from django.core.paginator import Paginator
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
@@ -56,9 +57,16 @@ def home(request):
     product_list = []
     for p in products:
         product_list.append(p)
+    paginator = Paginator(product_list, 10)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
 
-    return render(request, 'site_app/index.html', {'products': product_list})
+    return render(request, 'site_app/index.html', {
+        'products': product_list, 
+        'page_obj': page_obj
+    })
 
 def page2(request):
     #sell page
