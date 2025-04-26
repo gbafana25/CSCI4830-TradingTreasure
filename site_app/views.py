@@ -93,3 +93,7 @@ def page3(request):
 
 
     return render(request, 'site_app/elements.html', {})
+
+def buy_item(request, id):
+    prod = Product.objects.get(id=id)
+    return render(request, 'site_app/buy_item.html', {'prod': prod})
