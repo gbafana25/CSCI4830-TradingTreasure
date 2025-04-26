@@ -54,7 +54,23 @@
 								{% else %}
 									<p><strong>Address:</strong> Not available</p>
 								{% endif %}
+
+								<h2>Orders</h2>
+								<section class="posts">
+									{% for order in orders %}
+									<article>
+										<header>
+											<h3>{{ order.product.name }}</h3>
+											<p><strong>From: {{ order.seller.username }}</strong></p>
+										</header>
+										<p>{{ order.time_ordered }}</p>
+									</article>
+									{% empty %}
+									<p>No orders made</p>
+									{% endfor %}
+								</section>
 							</div>
+
 							<!-- Update Address Button 
 							<a href="{% url 'update_address' %}">
 								<button type="button">Update Address</button>

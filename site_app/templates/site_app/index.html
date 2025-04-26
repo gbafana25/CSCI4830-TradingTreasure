@@ -71,7 +71,7 @@
 
 						<!-- Posts -->
 						<section class="posts">
-    						{% for product in products %}
+    						{% for product in page_obj.object_list %}
     						<article>
         						<header>
             						<span class="date">{{ product.date_posted|date:"F d, Y" }}</span>
@@ -80,7 +80,7 @@
         						<a href="#" class="image fit"><img src="{{ product.image.url }}" alt="{{ product.name }}" /></a>
         						<p>{{ product.description|truncatewords:20 }}</p> <!-- Truncate description to 20 words -->
         						<ul class="actions special">
-            						<li><a href="buy-item/{{ product.id }}" class="button">Buy</a></li>
+            						<li><a href="{% url 'buy-item' product.id %}" class="button">Buy</a></li>
         						</ul>
     						</article>
     						{% empty %}
