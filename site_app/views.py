@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import SignupForm, AddressForm, ProductForm
-from .models import User, Address, Product
+from .models import User, Address, Product, Order
 from django.http import HttpResponse
 from django.core.paginator import Paginator
 
@@ -57,7 +57,7 @@ def home(request):
     product_list = []
     for p in products:
         product_list.append(p)
-    paginator = Paginator(product_list, 10)
+    paginator = Paginator(product_list, 2)
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -73,7 +73,7 @@ def page2(request):
     #generic.html
     if request.method == 'POST':
         product_form = ProductForm(request.POST)
-        log.debug(product_form)
+        #log.debug(product_form)
         if product_form.is_valid():
             # right now just using the first line of the address to fetch the Address database object
             # Product buyer_address must be the database object
@@ -81,7 +81,7 @@ def page2(request):
             addr = Address.objects.get(address_line1=line1)
             p = Product(name=product_form.cleaned_data['name'], price=product_form.cleaned_data['price'], category=product_form.cleaned_data['category'], owner=request.user, buyer_address=addr, is_bought=False)
             p.save()
-            redirect('/')
+            home(request)
     else:
         product_form = ProductForm()
     return render(request, 'site_app/generic.html', {'form': product_form})
@@ -89,7 +89,19 @@ def page2(request):
 def page3(request):
     #accounts page
     #elements.html
+    account_orders = Order.objects.filter(buyer=request.user)
 
+    return render(request, 'site_app/elements.html', {'orders': account_orders})
 
+@login_required
+def buy_item(request, id):
+    prod = Product.objects.get(id=id)
+    return render(request, 'site_app/buy_item.html', {'prod': prod})
 
-    return render(request, 'site_app/elements.html', {})
+@login_required
+def place_order(request, id):
+    prod = Product.objects.get(id=id)
+    order_obj = Order.objects.create(product=prod, buyer=request.user, seller=prod.owner, buyer_address=request.user.address)
+    prod.is_bought = True
+    prod.save()
+    return home(request)

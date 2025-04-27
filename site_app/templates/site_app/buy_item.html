@@ -50,64 +50,19 @@
 
 				<!-- Main -->
 					<div id="main">
+                        
+                        <section>
+                            <h1>Confirm order details</h1>
+                            <h2>{{ prod.name }} - ${{ prod.price | floatformat:2 }}</h2>
+                            
+                            <p>{{ prod.category }}</p>
+                            <p>Seller: {{ prod.owner.username }}, Contact: {{ prod.owner.email }}</p>
 
-						<!-- Featured Post -->
-							<!--
-							<article class="post featured">
-								<header class="major">
-									<span class="date">April 25, 2017</span>
-									<h2><a href="#">And this is a<br />
-									Test headline</a></h2>
-									<p>Aenean ornare velit lacus varius enim ullamcorper proin aliquam<br />
-									facilisis ante sed etiam magna interdum congue. Lorem ipsum dolor<br />
-									amet nullam sed etiam veroeros.</p>
-								</header>
-								<a href="#" class="image main"><img src={% static "images/pic01.jpg" %} alt="" /></a>
-								<ul class="actions special">
-									<li><a href="#" class="button large">Full Story</a></li>
-								</ul>
-							</article>
-							-->
-
-						<!-- Posts -->
-						<section class="posts">
-    						{% for product in page_obj.object_list %}
-    						<article>
-        						<header>
-            						<span class="date">{{ product.date_posted|date:"F d, Y" }}</span>
-            						<h2><a href="#">{{ product.name }}</a></h2>
-        						</header>
-        						<a href="#" class="image fit"><img src="{{ product.image.url }}" alt="{{ product.name }}" /></a>
-        						<p>{{ product.description|truncatewords:20 }}</p> <!-- Truncate description to 20 words -->
-        						<ul class="actions special">
-            						<li><a href="{% url 'buy-item' product.id %}" class="button">Buy</a></li>
-        						</ul>
-    						</article>
-    						{% empty %}
-    						<p>No products available at the moment.</p>
-    						{% endfor %}
-						</section>
-
-						<!-- Footer -->
-							<footer>
-								<div class="pagination">
-    									{% if page_obj.has_previous %}
-        									<a href="?page={{ page_obj.previous_page_number }}" class="previous">Previous</a>
-    									{% endif %}
-
-    									{% for num in page_obj.paginator.page_range %}
-        									{% if page_obj.number == num %}
-            										<a href="?page={{ num }}" class="page active">{{ num }}</a>
-        									{% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-            										<a href="?page={{ num }}" class="page">{{ num }}</a>
-        									{% endif %}
-    									{% endfor %}
-
-    									{% if page_obj.has_next %}
-        									<a href="?page={{ page_obj.next_page_number }}" class="next">Next</a>
-    									{% endif %}
-								</div>
-							</footer>
+                            <p>Posted: {{ prod.date_posted }}</p>
+                        </section>
+						<ul class="actions special">
+							<li><a href="{% url 'place-order' prod.id %}" class="button">Confirm Purchase</a></li>
+						</ul>
 
 					</div>
 				<!-- Copyright -->
