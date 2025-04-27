@@ -24,7 +24,7 @@ def signup(request):
             #new_user = signupform.save()
             login(request, new_user)
             addr_form = AddressForm()
-            return render(request, 'site_app/profile.html', {'profile': new_user, 'form': addr_form})
+            return render(request, 'site_app/elements.html', {'profile': new_user, 'form': addr_form})
         
     else:
         signupform = SignupForm()
