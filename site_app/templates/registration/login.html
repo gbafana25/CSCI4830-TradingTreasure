@@ -1,16 +1,34 @@
+{% load static %}
 <!DOCTYPE html>
 
-<title>Login</title>
+<html>
+		<head>
+		<title>Login</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href={% static "assets/css/main.css" %} />
+		<noscript><link rel="stylesheet" href= {% static "assets/css/noscript.css" %}  /></noscript>
 
-<h1 class="title">Login</h1>
-
-<form class="lform" action="{% url 'login' %}" method="post" >
-	{% csrf_token %}
-	<label for="username" >Username: </label><br>
-	<input type="text" id="username" name="username" value="{{ username }}" required><br>
-	<label for="password" >Password: </label><br>
-	<input type="password" id="password" name="password" value="{{ password }}" required><br>
-	<div><button type="submit">Login</button><br></div>
-	<input type="hidden" name="next" value="{{ next }}">
-	<p><a href="/signup">Create an account</a></p>
-</form>
+	</head>
+	<body>
+		<h1>Log into an account</h1> 
+		<form class="lform" action="{% url 'login' %}" method="post" >
+			{% csrf_token %}
+				<div>
+					<label for="username" >Username: </label><br>
+					<input type="text" id="username" name="username" value="{{ username }}" required><br>
+				</div>
+				<div>
+					<label for="password" >Password: </label><br>
+					<input type="password" id="password" name="password" value="{{ password }}" required><br>
+				</div>
+				<div>
+					<button type="submit">Login</button><br>
+				</div>
+				<div>
+				<input type="hidden" name="next" value="{{ next }}">
+				<p><a href="/signup">Create an account</a></p>
+			</div>
+		</form>
+	</body>
+</html>
