@@ -8,15 +8,13 @@
 </head>
 <h2>User profile info</h2>
 <p>{{ profile }}</p>
-
+<form action="{% url 'home' %}" method="post">
+    {% csrf_token %}
+    <div><button type="submit">Home</button></div>
+</form>
 <h2>Update address</h2>
-{% if form.errors %}
-    <div class="error">
-        {{ form.errors }}
-    </div>
-{% endif %}
 
-<form action="{% url 'update_address' %}?next=/profile" method="post">
+<form action="{% url 'update_address' %}" method="post">
     {% csrf_token %}
     <div>
         <label for="addr1">Address Line 1</label>

@@ -355,3 +355,192 @@ Watching for file changes with StatReloader
 Forbidden (CSRF token from POST incorrect.): /signup
 C:\Users\nikki\OneDrive\Desktop\Programming\Git\Trading\CSCI4830-TradingTreasure\site_app\views.py changed, reloading.
 Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Not Found: /favicon.ico
+Internal Server Error: /page2/
+Traceback (most recent call last):
+  File "/home/gareth/school/software_eng/group-project/env/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gareth/school/software_eng/group-project/env/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gareth/school/software_eng/group-project/site_app/views.py", line 81, in page2
+    addr = Address.objects.get(address_line1=line1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gareth/school/software_eng/group-project/env/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gareth/school/software_eng/group-project/env/lib/python3.12/site-packages/django/db/models/query.py", line 652, in get
+    raise self.model.MultipleObjectsReturned(
+site_app.models.Address.MultipleObjectsReturned: get() returned more than one Address -- it returned 2!
+/home/gareth/school/software_eng/group-project/site_app/views.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /page2/
+Traceback (most recent call last):
+  File "/home/gareth/school/software_eng/group-project/env/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gareth/school/software_eng/group-project/env/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gareth/school/software_eng/group-project/site_app/views.py", line 81, in page2
+    addr = Address.objects.get(address_line1=line1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gareth/school/software_eng/group-project/env/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gareth/school/software_eng/group-project/env/lib/python3.12/site-packages/django/db/models/query.py", line 652, in get
+    raise self.model.MultipleObjectsReturned(
+site_app.models.Address.MultipleObjectsReturned: get() returned more than one Address -- it returned 2!
+/home/gareth/school/software_eng/group-project/site_app/views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/home/gareth/school/software_eng/group-project/site_app/views.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /update_address
+Traceback (most recent call last):
+  File "/home/gareth/school/software_eng/group-project/env/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gareth/school/software_eng/group-project/env/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gareth/school/software_eng/group-project/env/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 60, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gareth/school/software_eng/group-project/site_app/views.py", line 53, in update_address
+    return render(request, 'site_app/page2.html', {'profile': u, 'form': addr_form})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gareth/school/software_eng/group-project/env/lib/python3.12/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gareth/school/software_eng/group-project/env/lib/python3.12/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gareth/school/software_eng/group-project/env/lib/python3.12/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: site_app/page2.html
+/home/gareth/school/software_eng/group-project/site_app/views.py changed, reloading.
+Watching for file changes with StatReloader
+Forbidden (CSRF token missing.): /update_address
+Forbidden (CSRF token missing.): /update_address
+/home/gareth/school/software_eng/group-project/site_app/views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Internal Server Error: /page2/
+Traceback (most recent call last):
+  File "/home/gareth/school/software_eng/group-project/env/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gareth/school/software_eng/group-project/env/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gareth/school/software_eng/group-project/site_app/views.py", line 82, in page2
+    addr = Address.objects.get(address_line1=line1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gareth/school/software_eng/group-project/env/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gareth/school/software_eng/group-project/env/lib/python3.12/site-packages/django/db/models/query.py", line 652, in get
+    raise self.model.MultipleObjectsReturned(
+site_app.models.Address.MultipleObjectsReturned: get() returned more than one Address -- it returned 2!
+/home/gareth/school/software_eng/group-project/site_app/views.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /page2/
+Traceback (most recent call last):
+  File "/home/gareth/school/software_eng/group-project/env/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gareth/school/software_eng/group-project/env/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gareth/school/software_eng/group-project/site_app/views.py", line 82, in page2
+    addr = Address.objects.get(address_line1=line1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gareth/school/software_eng/group-project/env/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gareth/school/software_eng/group-project/env/lib/python3.12/site-packages/django/db/models/query.py", line 652, in get
+    raise self.model.MultipleObjectsReturned(
+site_app.models.Address.MultipleObjectsReturned: get() returned more than one Address -- it returned 2!
+/home/gareth/school/software_eng/group-project/site_app/views.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /page2/
+Traceback (most recent call last):
+  File "/home/gareth/school/software_eng/group-project/env/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gareth/school/software_eng/group-project/env/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gareth/school/software_eng/group-project/site_app/views.py", line 82, in page2
+    addr = Address.objects.get(address_line1=line1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gareth/school/software_eng/group-project/env/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gareth/school/software_eng/group-project/env/lib/python3.12/site-packages/django/db/models/query.py", line 652, in get
+    raise self.model.MultipleObjectsReturned(
+site_app.models.Address.MultipleObjectsReturned: get() returned more than one Address -- it returned 2!
+/home/gareth/school/software_eng/group-project/site_app/views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Internal Server Error: /page2/
+Traceback (most recent call last):
+  File "/home/gareth/school/software_eng/group-project/env/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gareth/school/software_eng/group-project/env/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gareth/school/software_eng/group-project/site_app/views.py", line 82, in page2
+    addr = Address.objects.get(address_line1=line1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gareth/school/software_eng/group-project/env/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gareth/school/software_eng/group-project/env/lib/python3.12/site-packages/django/db/models/query.py", line 652, in get
+    raise self.model.MultipleObjectsReturned(
+site_app.models.Address.MultipleObjectsReturned: get() returned more than one Address -- it returned 2!
+/home/gareth/school/software_eng/group-project/site_app/views.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /page2/
+Traceback (most recent call last):
+  File "/home/gareth/school/software_eng/group-project/env/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gareth/school/software_eng/group-project/env/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gareth/school/software_eng/group-project/site_app/views.py", line 82, in page2
+    addr = Address.objects.get(address_line1=line1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gareth/school/software_eng/group-project/env/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gareth/school/software_eng/group-project/env/lib/python3.12/site-packages/django/db/models/query.py", line 652, in get
+    raise self.model.MultipleObjectsReturned(
+site_app.models.Address.MultipleObjectsReturned: get() returned more than one Address -- it returned 2!
+/home/gareth/school/software_eng/group-project/site_app/views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Internal Server Error: /page2/
+Traceback (most recent call last):
+  File "/home/gareth/school/software_eng/group-project/env/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gareth/school/software_eng/group-project/env/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gareth/school/software_eng/group-project/site_app/views.py", line 83, in page2
+    addr = Address.objects.get(address_line1=line1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gareth/school/software_eng/group-project/env/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gareth/school/software_eng/group-project/env/lib/python3.12/site-packages/django/db/models/query.py", line 652, in get
+    raise self.model.MultipleObjectsReturned(
+site_app.models.Address.MultipleObjectsReturned: get() returned more than one Address -- it returned 2!
+/home/gareth/school/software_eng/group-project/site_app/views.py changed, reloading.
+Watching for file changes with StatReloader
