@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 
 import logging
-log = logging.getLogger(__name__)
+#log = logging.getLogger(__name__)
 
 # Create your views here.
 def signup(request):
@@ -46,6 +46,7 @@ def update_address(request):
             addr = Address.objects.create(address_line1=addr_form.cleaned_data['address_line1'], address_line2=addr_form.cleaned_data['address_line2'], city=addr_form.cleaned_data['city'], state=addr_form.cleaned_data['state'], zip_code=addr_form.cleaned_data['zip_code'])
             u.address = addr
             u.save()
+            home(request)
     else:
         addr_form = AddressForm()
 
@@ -57,7 +58,7 @@ def home(request):
     product_list = []
     for p in products:
         product_list.append(p)
-    paginator = Paginator(product_list, 2)
+    paginator = Paginator(product_list, 10)
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -78,8 +79,10 @@ def page2(request):
             # right now just using the first line of the address to fetch the Address database object
             # Product buyer_address must be the database object
             line1 = product_form.cleaned_data['buyer_address'].split(',')[0]
-            addr = Address.objects.get(address_line1=line1)
-            p = Product(name=product_form.cleaned_data['name'], price=product_form.cleaned_data['price'], category=product_form.cleaned_data['category'], owner=request.user, buyer_address=addr, is_bought=False)
+            print(line1)
+            addr = Address.objects.filter(address_line1=line1)
+           # print(addr)
+            p = Product(name=product_form.cleaned_data['name'], price=product_form.cleaned_data['price'], category=product_form.cleaned_data['category'], owner=request.user, buyer_address=addr[0], is_bought=False)
             p.save()
             home(request)
     else:

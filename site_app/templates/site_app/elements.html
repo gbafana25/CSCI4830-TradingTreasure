@@ -55,6 +55,12 @@
 									<p><strong>Address:</strong> Not available</p>
 								{% endif %}
 
+								<h3>Change Address</h3>
+								<form action="{% url 'update_address' %}" method="post">
+									{% csrf_token %}
+									<div><button type="submit">Update Address</button></div>
+								</form>
+
 								<h2>Orders</h2>
 								<section class="posts">
 									{% for order in orders %}
@@ -74,7 +80,7 @@
 							<!-- Update Address Button 
 							<a href="{% url 'update_address' %}">
 								<button type="button">Update Address</button>
-							</a>-->
+							</a>
 							<!-- Logout Button -->
 							<form method="POST" action="{% url 'logout' %}">
 								{% csrf_token %}
