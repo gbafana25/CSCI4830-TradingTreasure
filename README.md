@@ -38,6 +38,17 @@ software dev. group project
 - start nginx: `sudo systemctl restart nginx`
 - the site should now be visible at the AWS instance's DNS address
 
+## Running test suite
+- requires selenium IDE extension in chrome: https://addons.mozilla.org/en-US/firefox/addon/selenium-ide/
+- click extension, open existing project: trading-treasure.side
+- slightly lower test speed
+- Preferred test order:
+    1. Login test
+    2. Signup test - account registered here should be deleted before test runs
+    3. update address test
+    4. sell item
+    5. buy item
+
 - TODO: enable SSL (letsencrypt/certbot)
 - sources:
     - https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu
