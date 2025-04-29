@@ -6,6 +6,7 @@ from django.core.paginator import Paginator
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
+from django.core.mail import send_mail
 
 import logging
 #log = logging.getLogger(__name__)
@@ -84,6 +85,13 @@ def page2(request):
            # print(addr)
             p = Product(name=product_form.cleaned_data['name'], price=product_form.cleaned_data['price'], category=product_form.cleaned_data['category'], owner=request.user, buyer_address=addr[0], is_bought=False)
             p.save()
+            send_mail(
+                "Product listed - Trading Treasure",
+                "Your product "+p.name+" has  been listed for $"+str(p.price),
+                "tradingtreasure@example.com",
+                [request.user.email],
+                fail_silently=False
+            )
             home(request)
     else:
         product_form = ProductForm()
@@ -92,7 +100,7 @@ def page2(request):
 def page3(request):
     #accounts page
     #elements.html
-    account_orders = Order.objects.filter(buyer=request.user)
+    account_orders = Order.objects.filter(seller=request.user.id)
 
     return render(request, 'site_app/elements.html', {'orders': account_orders})
 
@@ -107,4 +115,21 @@ def place_order(request, id):
     order_obj = Order.objects.create(product=prod, buyer=request.user, seller=prod.owner, buyer_address=request.user.address)
     prod.is_bought = True
     prod.save()
+    order_obj.save()
+    # send email to buyer to confirm purchase
+    send_mail(
+        "Product purchased - Trading Treasure",
+        "Your product "+prod.name+" has has been purchased by "+request.user.username+" for $"+str(prod.price),
+        "tradingtreasure@example.com",
+        [order_obj.seller.email],
+        fail_silently=False
+    )
+
+    send_mail(
+        "Product purchased - Trading Treasure",
+        "You purchased "+prod.name+" for $"+str(prod.price),
+        "tradingtreasure@example.com",
+        [request.user.email],
+        fail_silently=False
+    )
     return home(request)
