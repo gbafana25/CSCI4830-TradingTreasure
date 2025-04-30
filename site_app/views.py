@@ -18,9 +18,12 @@ def signup(request):
 
         if signupform.is_valid():
             #print(signupform.cleaned_data)
+            new_addr = Address.objects.create(address_line1=signupform.cleaned_data['address_line1'], address_line2=signupform.cleaned_data['address_line2'], city=signupform.cleaned_data['city'], state=signupform.cleaned_data['state'], zip_code=signupform.cleaned_data['zip_code'])
+            new_addr.save()
             new_user = User.objects.create_user(signupform.cleaned_data['username'], signupform.cleaned_data['email'], signupform.cleaned_data['password'])
             new_user.location = signupform.cleaned_data['location']
             new_user.phone_number = signupform.cleaned_data['phone_number']
+            new_user.address = new_addr
             new_user.save()
             #new_user = signupform.save()
             login(request, new_user)
