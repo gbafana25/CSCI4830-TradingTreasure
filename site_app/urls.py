@@ -1,5 +1,6 @@
 from django.urls import path, include
 from . import views
+from .views import CreateCheckoutSessionView
 
 urlpatterns = [
 	path('accounts/', include('django.contrib.auth.urls')),
@@ -11,5 +12,6 @@ urlpatterns = [
     path('page2/', views.page2, name="page2"),
     path('page3/', views.page3, name="page3"),
     path('buy-item/<uuid:id>/', views.buy_item, name="buy-item"),
-    path('place-order/<uuid:id>/', views.place_order, name="place-order")
+    path('place-order/<uuid:id>/', views.place_order, name="place-order"),
+    path('create-checkout-session/', CreateCheckoutSessionView.as_view(), name='create-checkout-session'),
 ]

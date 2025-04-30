@@ -1,12 +1,15 @@
 from django.shortcuts import render, redirect
 from .forms import SignupForm, AddressForm, ProductForm
 from .models import User, Address, Product, Order
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.core.paginator import Paginator
+from django.conf import settings
+from django.views import View
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 
+import stripe
 import logging
 #log = logging.getLogger(__name__)
 
@@ -108,3 +111,28 @@ def place_order(request, id):
     prod.is_bought = True
     prod.save()
     return home(request)
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
+
+class CreateCheckoutSessionView(View):
+    def post(self, request, *args, **kwargs):
+        YOUR_DOMAIN = "http://localhost:8000"
+        checkout_session = stripe.checkout.Session.create(
+                payment_method_types=['card'],
+                line_items=[
+                    {
+                        'price_data':{
+                            'currency': 'usd',
+                            'unit_amount': 2000,
+                            'product_data': {
+                                'name': 'Trading Treasure Item',
+                                },
+                            },
+                        'quantity': 1,
+                        },
+                    ],
+                mode='payment',
+                success_url=YOUR_DOMAIN + '/success/',
+                cancel_url=YOUR_DOMAIN + '/cancel/',
+                )
+        return JsonResponse({'id': checkout_session.id})
