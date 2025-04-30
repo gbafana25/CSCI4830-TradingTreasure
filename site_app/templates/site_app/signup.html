@@ -39,6 +39,26 @@
 				<label for="phone_number">Phone Number</label>
 				<p id="phone_number">{{ form.phone_number }}</p>
 			</div>
+			<div>
+				<label for="addr1">Address Line 1</label>
+				{{ form.address_line1 }}
+			</div>
+			<div>
+				<label for="addr2">Address Line 2</label>
+				{{ form.address_line2 }}
+			</div>
+			<div>
+				<label for="city">City</label>
+				{{ form.city }}
+			</div>
+			<div>
+				<label for="state">State</label>
+				{{ form.state }}
+			</div>
+			<div>
+				<label for="zipcode">Zip Code</label>
+				{{ form.zip_code }}
+			</div>
 			<div><button type="submit">Create account</button><br></div>
 		</form>
 	</body>
