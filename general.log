@@ -571,3 +571,16 @@ Traceback (most recent call last):
     form = StripePaymentForm(initial={'product_id': prod.id})
            ^^^^^^^^^^^^^^^^^
 NameError: name 'StripePaymentForm' is not defined
+Watching for file changes with StatReloader
+Internal Server Error: /buy-item/6581153e-cdfe-408d-92ad-153fc42032f0/
+Traceback (most recent call last):
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\site_app\views.py", line 108, in buy_item
+    form = StripePaymentForm(initial={'product_id': prod.id})
+           ^^^^^^^^^^^^^^^^^
+NameError: name 'StripePaymentForm' is not defined

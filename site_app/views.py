@@ -7,6 +7,7 @@ from django.conf import settings
 from django.views import View
 from django.views.generic import TemplateView
 from django.views.decorators.csrf import csrf_exempt
+from django.urls import reverse
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
@@ -143,8 +144,8 @@ class PaymentCheckoutView(TemplateView):
                 },
             ],
             mode='payment',
-            success_url="http://localhost:8000/pay_success/",
-            cancel_url="http://localhost:8000/pay_cancel/",
+            success_url=request.build_absolute_uri(reverse('pay_success')),
+            cancel_url=request.build_absolute_uri(reverse('pay_cancel')),
         )
         return redirect(checkout_session.url, code=303)
 
