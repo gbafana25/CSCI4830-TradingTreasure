@@ -104,7 +104,8 @@ def page3(request):
 @login_required
 def buy_item(request, id):
     prod = Product.objects.get(id=id)
-    return render(request, 'site_app/buy_item.html', {'prod': prod})
+    form = StripePaymentForm(initial={'product_id': prod.id})
+    return render(request, 'site_app/buy_item.html', {'prod': prod, 'stripe_form': form})
 
 @login_required
 def place_order(request, id):
@@ -136,7 +137,7 @@ class PaymentCheckoutView(TemplateView):
                         'product_data': {
                             'name': product.name,
                         },
-                        'unit_amount': int(product.price),
+                        'unit_amount': int(product.price * 100),
                     },
                     'quantity': 1,
                 },
