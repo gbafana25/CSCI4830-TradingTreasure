@@ -5,6 +5,8 @@ from django.http import HttpResponse, JsonResponse
 from django.core.paginator import Paginator
 from django.conf import settings
 from django.views import View
+from django.views.generic import TemplateView
+from django.views.decorators.csrf import csrf_exempt
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
@@ -112,27 +114,58 @@ def place_order(request, id):
     prod.save()
     return home(request)
 
-stripe.api_key = settings.STRIPE_SECRET_KEY
+stripe.api_key = settings.STRIPE_TEST_SECRET_KEY
 
-class CreateCheckoutSessionView(View):
+class PaymentCheckoutView(TemplateView):
+    template_name = 'payment_checkout.html'
+
     def post(self, request, *args, **kwargs):
         YOUR_DOMAIN = "http://localhost:8000"
         checkout_session = stripe.checkout.Session.create(
-                payment_method_types=['card'],
-                line_items=[
-                    {
-                        'price_data':{
-                            'currency': 'usd',
-                            'unit_amount': 2000,
-                            'product_data': {
-                                'name': 'Trading Treasure Item',
-                                },
-                            },
-                        'quantity': 1,
+            payment_method_types=['card'],
+            line_items=[
+                {
+                    'price_data': {
+                        'currency': 'usd',
+                        'product_data': {
+                            'name': 'Product Name',
                         },
-                    ],
-                mode='payment',
-                success_url=YOUR_DOMAIN + '/success/',
-                cancel_url=YOUR_DOMAIN + '/cancel/',
-                )
-        return JsonResponse({'id': checkout_session.id})
+                        'unit_amount': 2000,  # Amount in cents
+                    },
+                    'quantity': 1,
+                },
+            ],
+            mode='payment',
+            success_url=YOUR_DOMAIN + '/pay_success/',
+            cancel_url=YOUR_DOMAIN + '/pay_cancel/',
+        )
+        return redirect(checkout_session.url, code=303)
+
+class SuccessView(TemplateView):
+    template_name = 'payment_success.html'
+
+class CancelView(TemplateView):
+    template_name = 'payment_cancel.html'
+
+@csrf_exempt
+def stripe_webhook(request):
+    payload = request.body
+    sig_header = request.META.get('HTTP_STRIPE_SIGNATURE')
+    endpoint_secret = settings.STRIPE_ENDPOINT_SECRET
+
+    try:
+        event = stripe.Webhook.construct_event(
+            payload, sig_header, endpoint_secret
+        )
+    except ValueError:
+        return JsonResponse({'error': 'Invalid payload'}, status=400)
+    except stripe.error.SignatureVerificationError:
+        return JsonResponse({'error': 'Invalid signature'}, status=400)
+
+    # Handle the event
+    if event['type'] == 'checkout.session.completed':
+        session = event['data']['object']
+        print('✅ Payment succeeded for session:', session['id'])
+        # Optionally: update order status, send email, etc.
+
+    return JsonResponse({'status': 'success'}, status=200)
