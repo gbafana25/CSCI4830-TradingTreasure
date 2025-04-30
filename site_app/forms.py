@@ -26,6 +26,9 @@ class ProductForm(forms.Form):
     price = forms.FloatField()
     category = forms.CharField()
     buyer_address = forms.CharField()
+
+class StripePaymentForm(forms.Form):
+    product_id = forms.UUIDField(widget=forms.HiddenInput())
    
     
     #fields = ['name', 'price', 'category', 'owner', 'buyer_address', 'is_bought']

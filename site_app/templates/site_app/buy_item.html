@@ -83,3 +83,9 @@
 
 	</body>
 </html>
+
+<form method="post" action="{% url 'pay' %}">
+    {% csrf_token %}
+    <input type="hidden" name="product_id" value="{{ prod.id }}">
+    <button type="submit">Buy with Stripe</button>
+</form>

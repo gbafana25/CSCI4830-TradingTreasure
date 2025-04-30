@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import SignupForm, AddressForm, ProductForm
-from .models import User, Address, Product, Order
+from .models import User, Address, Product, Order, Product
 from django.http import HttpResponse, JsonResponse
 from django.core.paginator import Paginator
 from django.conf import settings
@@ -120,7 +120,13 @@ class PaymentCheckoutView(TemplateView):
     template_name = 'payment_checkout.html'
 
     def post(self, request, *args, **kwargs):
-        YOUR_DOMAIN = "http://localhost:8000"
+        product_id = request.POST.get('product_id')
+        try:
+            product = Product.objects.get(id=product_id)
+        except Product.DoesNotExist:
+            return JsonResponse({'error': 'Product not found'}, status=404)
+
+
         checkout_session = stripe.checkout.Session.create(
             payment_method_types=['card'],
             line_items=[
@@ -128,16 +134,16 @@ class PaymentCheckoutView(TemplateView):
                     'price_data': {
                         'currency': 'usd',
                         'product_data': {
-                            'name': 'Product Name',
+                            'name': product.name,
                         },
-                        'unit_amount': 2000,  # Amount in cents
+                        'unit_amount': int(product.price),
                     },
                     'quantity': 1,
                 },
             ],
             mode='payment',
-            success_url=YOUR_DOMAIN + '/pay_success/',
-            cancel_url=YOUR_DOMAIN + '/pay_cancel/',
+            success_url="http://localhost:8000/pay_success/",
+            cancel_url="http://localhost:8000/pay_cancel/",
         )
         return redirect(checkout_session.url, code=303)
 
