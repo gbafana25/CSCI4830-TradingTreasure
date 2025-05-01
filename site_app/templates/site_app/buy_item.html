@@ -59,6 +59,15 @@
                             <p>Seller: {{ prod.owner.username }}, Contact: {{ prod.owner.email }}</p>
 
                             <p>Posted: {{ prod.date_posted }}</p>
+
+							<form action="{% url 'message-owner' prod.id %}" method="post">
+								{% csrf_token %}
+								<div class="field">
+									<label for="addr1">Message</label>
+									{{ form.message }}
+								</div>
+								<div><button type="submit">Message Owner</button></div>
+							</form>
                         </section>
 						<ul class="actions special">
 							<li>
