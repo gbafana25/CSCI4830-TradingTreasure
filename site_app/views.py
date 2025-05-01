@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import SignupForm, AddressForm, ProductForm
+from .forms import SignupForm, AddressForm, ProductForm, StripePaymentForm
 from .models import User, Address, Product, Order, Product
 from django.http import HttpResponse, JsonResponse
 from django.core.paginator import Paginator
@@ -118,9 +118,8 @@ def place_order(request, id):
 
 stripe.api_key = settings.STRIPE_TEST_SECRET_KEY
 
-class PaymentCheckoutView(TemplateView):
-    template_name = 'payment_checkout.html'
-
+class PaymentCheckoutView(View):
+    
     def post(self, request, *args, **kwargs):
         product_id = request.POST.get('product_id')
         try:
@@ -150,7 +149,12 @@ class PaymentCheckoutView(TemplateView):
         return redirect(checkout_session.url, code=303)
 
 class SuccessView(TemplateView):
-    template_name = 'payment_success.html'
+    template_name = 'site_app/payment_success.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['some_data'] = 'value'
+        return context
 
 class CancelView(TemplateView):
     template_name = 'payment_cancel.html'

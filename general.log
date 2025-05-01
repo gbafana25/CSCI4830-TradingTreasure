@@ -584,3 +584,259 @@ Traceback (most recent call last):
     form = StripePaymentForm(initial={'product_id': prod.id})
            ^^^^^^^^^^^^^^^^^
 NameError: name 'StripePaymentForm' is not defined
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+message='Request to Stripe api' method=post url=https://api.stripe.com/v1/checkout/sessions
+api_version=2025-04-30.basil message='Post details' post_data=payment_method_types[0]=card&line_items[0][price_data][currency]=usd&line_items[0][price_data][product_data][name]=asdf&line_items[0][price_data][unit_amount]=300&line_items[0][quantity]=1&mode=payment&success_url=http%3A%2F%2F127.0.0.1%3A8000%2Fpay_success%2F&cancel_url=http%3A%2F%2F127.0.0.1%3A8000%2Fpay_cancel%2F
+Starting new HTTPS connection (1): api.stripe.com:443
+https://api.stripe.com:443 "POST /v1/checkout/sessions HTTP/1.1" 200 2592
+message='Stripe API response' path=https://api.stripe.com/v1/checkout/sessions response_code=200
+body='{\n  "id": "cs_test_a1QOjEw20bklRCslkq3i0qZQJ6plZQKyfQ7M39CrTomfEbz9lN2AcccS9k",\n  "object": "checkout.session",\n  "adaptive_pricing": {\n    "enabled": true\n  },\n  "after_expiration": null,\n  "allow_promotion_codes": null,\n  "amount_subtotal": 300,\n  "amount_total": 300,\n  "automatic_tax": {\n    "enabled": false,\n    "liability": null,\n    "provider": null,\n    "status": null\n  },\n  "billing_address_collection": null,\n  "cancel_url": "http://127.0.0.1:8000/pay_cancel/",\n  "client_reference_id": null,\n  "client_secret": null,\n  "collected_information": null,\n  "consent": null,\n  "consent_collection": null,\n  "created": 1746053359,\n  "currency": "usd",\n  "currency_conversion": null,\n  "custom_fields": [],\n  "custom_text": {\n    "after_submit": null,\n    "shipping_address": null,\n    "submit": null,\n    "terms_of_service_acceptance": null\n  },\n  "customer": null,\n  "customer_creation": "if_required",\n  "customer_details": null,\n  "customer_email": null,\n  "discounts": [],\n  "expires_at": 1746139759,\n  "invoice": null,\n  "invoice_creation": {\n    "enabled": false,\n    "invoice_data": {\n      "account_tax_ids": null,\n      "custom_fields": null,\n      "description": null,\n      "footer": null,\n      "issuer": null,\n      "metadata": {},\n      "rendering_options": null\n    }\n  },\n  "livemode": false,\n  "locale": null,\n  "metadata": {},\n  "mode": "payment",\n  "payment_intent": null,\n  "payment_link": null,\n  "payment_method_collection": "if_required",\n  "payment_method_configuration_details": null,\n  "payment_method_options": {\n    "card": {\n      "request_three_d_secure": "automatic"\n    }\n  },\n  "payment_method_types": [\n    "card"\n  ],\n  "payment_status": "unpaid",\n  "permissions": null,\n  "phone_number_collection": {\n    "enabled": false\n  },\n  "recovered_from": null,\n  "saved_payment_method_options": null,\n  "setup_intent": null,\n  "shipping_address_collection": null,\n  "shipping_cost": null,\n  "shipping_options": [],\n  "status": "open",\n  "submit_type": null,\n  "subscription": null,\n  "success_url": "http://127.0.0.1:8000/pay_success/",\n  "total_details": {\n    "amount_discount": 0,\n    "amount_shipping": 0,\n    "amount_tax": 0\n  },\n  "ui_mode": "hosted",\n  "url": "https://checkout.stripe.com/c/pay/cs_test_a1QOjEw20bklRCslkq3i0qZQJ6plZQKyfQ7M39CrTomfEbz9lN2AcccS9k#fidkdWxOYHwnPyd1blpxYHZxWjA0V09MczBXcjRWRmdzZ2dOMH1%2FMzY9UElrfDRTZG8yU21BUkpjYm58UktkTDBhUGZkQT1yVjBCPGZSf1ExSGdnV0xHdjRAbGlTa2RUX2F9cWRTNUdkSExVNTV2a2NAMXZcYCcpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl",\n  "wallet_options": null\n}' message='API response body'
+link=https://dashboard.stripe.com/test/logs/req_PGnDQW0fGe3G4w message='Dashboard link for request'
+Internal Server Error: /pay_success/
+Traceback (most recent call last):
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\loader.py", line 47, in select_template
+    raise TemplateDoesNotExist(", ".join(template_name_list), chain=chain)
+django.template.exceptions.TemplateDoesNotExist: payment_success.html
+Watching for file changes with StatReloader
+message='Request to Stripe api' method=post url=https://api.stripe.com/v1/checkout/sessions
+api_version=2025-04-30.basil message='Post details' post_data=payment_method_types[0]=card&line_items[0][price_data][currency]=usd&line_items[0][price_data][product_data][name]=asdf&line_items[0][price_data][unit_amount]=300&line_items[0][quantity]=1&mode=payment&success_url=http%3A%2F%2F127.0.0.1%3A8000%2Fpay_success%2F&cancel_url=http%3A%2F%2F127.0.0.1%3A8000%2Fpay_cancel%2F
+Starting new HTTPS connection (1): api.stripe.com:443
+https://api.stripe.com:443 "POST /v1/checkout/sessions HTTP/1.1" 200 2592
+message='Stripe API response' path=https://api.stripe.com/v1/checkout/sessions response_code=200
+body='{\n  "id": "cs_test_a1AwKJk82JDncm3argzL9rkLOaZfT0Vwo1mLnIi3ZkBEMUGGzj6LCKMGaB",\n  "object": "checkout.session",\n  "adaptive_pricing": {\n    "enabled": true\n  },\n  "after_expiration": null,\n  "allow_promotion_codes": null,\n  "amount_subtotal": 300,\n  "amount_total": 300,\n  "automatic_tax": {\n    "enabled": false,\n    "liability": null,\n    "provider": null,\n    "status": null\n  },\n  "billing_address_collection": null,\n  "cancel_url": "http://127.0.0.1:8000/pay_cancel/",\n  "client_reference_id": null,\n  "client_secret": null,\n  "collected_information": null,\n  "consent": null,\n  "consent_collection": null,\n  "created": 1746054097,\n  "currency": "usd",\n  "currency_conversion": null,\n  "custom_fields": [],\n  "custom_text": {\n    "after_submit": null,\n    "shipping_address": null,\n    "submit": null,\n    "terms_of_service_acceptance": null\n  },\n  "customer": null,\n  "customer_creation": "if_required",\n  "customer_details": null,\n  "customer_email": null,\n  "discounts": [],\n  "expires_at": 1746140497,\n  "invoice": null,\n  "invoice_creation": {\n    "enabled": false,\n    "invoice_data": {\n      "account_tax_ids": null,\n      "custom_fields": null,\n      "description": null,\n      "footer": null,\n      "issuer": null,\n      "metadata": {},\n      "rendering_options": null\n    }\n  },\n  "livemode": false,\n  "locale": null,\n  "metadata": {},\n  "mode": "payment",\n  "payment_intent": null,\n  "payment_link": null,\n  "payment_method_collection": "if_required",\n  "payment_method_configuration_details": null,\n  "payment_method_options": {\n    "card": {\n      "request_three_d_secure": "automatic"\n    }\n  },\n  "payment_method_types": [\n    "card"\n  ],\n  "payment_status": "unpaid",\n  "permissions": null,\n  "phone_number_collection": {\n    "enabled": false\n  },\n  "recovered_from": null,\n  "saved_payment_method_options": null,\n  "setup_intent": null,\n  "shipping_address_collection": null,\n  "shipping_cost": null,\n  "shipping_options": [],\n  "status": "open",\n  "submit_type": null,\n  "subscription": null,\n  "success_url": "http://127.0.0.1:8000/pay_success/",\n  "total_details": {\n    "amount_discount": 0,\n    "amount_shipping": 0,\n    "amount_tax": 0\n  },\n  "ui_mode": "hosted",\n  "url": "https://checkout.stripe.com/c/pay/cs_test_a1AwKJk82JDncm3argzL9rkLOaZfT0Vwo1mLnIi3ZkBEMUGGzj6LCKMGaB#fidkdWxOYHwnPyd1blpxYHZxWjA0V09MczBXcjRWRmdzZ2dOMH1%2FMzY9UElrfDRTZG8yU21BUkpjYm58UktkTDBhUGZkQT1yVjBCPGZSf1ExSGdnV0xHdjRAbGlTa2RUX2F9cWRTNUdkSExVNTV2a2NAMXZcYCcpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl",\n  "wallet_options": null\n}' message='API response body'
+link=https://dashboard.stripe.com/test/logs/req_L95gNS0RzBJOdM message='Dashboard link for request'
+Internal Server Error: /pay_success/
+Traceback (most recent call last):
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\loader.py", line 47, in select_template
+    raise TemplateDoesNotExist(", ".join(template_name_list), chain=chain)
+django.template.exceptions.TemplateDoesNotExist: payment_success.html
+Watching for file changes with StatReloader
+Internal Server Error: /pay_success/
+Traceback (most recent call last):
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\loader.py", line 47, in select_template
+    raise TemplateDoesNotExist(", ".join(template_name_list), chain=chain)
+django.template.exceptions.TemplateDoesNotExist: payment_success.html
+Internal Server Error: /pay_success/
+Traceback (most recent call last):
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\loader.py", line 47, in select_template
+    raise TemplateDoesNotExist(", ".join(template_name_list), chain=chain)
+django.template.exceptions.TemplateDoesNotExist: payment_success.html
+Internal Server Error: /pay_success/
+Traceback (most recent call last):
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\loader.py", line 47, in select_template
+    raise TemplateDoesNotExist(", ".join(template_name_list), chain=chain)
+django.template.exceptions.TemplateDoesNotExist: payment_success.html
+Internal Server Error: /pay_success/
+Traceback (most recent call last):
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\loader.py", line 47, in select_template
+    raise TemplateDoesNotExist(", ".join(template_name_list), chain=chain)
+django.template.exceptions.TemplateDoesNotExist: payment_success.html
+Internal Server Error: /pay_success/
+Traceback (most recent call last):
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\loader.py", line 47, in select_template
+    raise TemplateDoesNotExist(", ".join(template_name_list), chain=chain)
+django.template.exceptions.TemplateDoesNotExist: payment_success.html
+Internal Server Error: /pay_success/
+Traceback (most recent call last):
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\loader.py", line 47, in select_template
+    raise TemplateDoesNotExist(", ".join(template_name_list), chain=chain)
+django.template.exceptions.TemplateDoesNotExist: payment_success.html
+Watching for file changes with StatReloader
+Internal Server Error: /pay_success/
+Traceback (most recent call last):
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\loader.py", line 47, in select_template
+    raise TemplateDoesNotExist(", ".join(template_name_list), chain=chain)
+django.template.exceptions.TemplateDoesNotExist: payment_success.html
+message='Request to Stripe api' method=post url=https://api.stripe.com/v1/checkout/sessions
+api_version=2025-04-30.basil message='Post details' post_data=payment_method_types[0]=card&line_items[0][price_data][currency]=usd&line_items[0][price_data][product_data][name]=asdf&line_items[0][price_data][unit_amount]=300&line_items[0][quantity]=1&mode=payment&success_url=http%3A%2F%2F127.0.0.1%3A8000%2Fpay_success%2F&cancel_url=http%3A%2F%2F127.0.0.1%3A8000%2Fpay_cancel%2F
+Starting new HTTPS connection (1): api.stripe.com:443
+https://api.stripe.com:443 "POST /v1/checkout/sessions HTTP/1.1" 200 2592
+message='Stripe API response' path=https://api.stripe.com/v1/checkout/sessions response_code=200
+body='{\n  "id": "cs_test_a1OLJWF0rfbOQwM94FXVysdqxwqOSHkDP4gfd9cZyxuBHREToNtlnineSL",\n  "object": "checkout.session",\n  "adaptive_pricing": {\n    "enabled": true\n  },\n  "after_expiration": null,\n  "allow_promotion_codes": null,\n  "amount_subtotal": 300,\n  "amount_total": 300,\n  "automatic_tax": {\n    "enabled": false,\n    "liability": null,\n    "provider": null,\n    "status": null\n  },\n  "billing_address_collection": null,\n  "cancel_url": "http://127.0.0.1:8000/pay_cancel/",\n  "client_reference_id": null,\n  "client_secret": null,\n  "collected_information": null,\n  "consent": null,\n  "consent_collection": null,\n  "created": 1746054596,\n  "currency": "usd",\n  "currency_conversion": null,\n  "custom_fields": [],\n  "custom_text": {\n    "after_submit": null,\n    "shipping_address": null,\n    "submit": null,\n    "terms_of_service_acceptance": null\n  },\n  "customer": null,\n  "customer_creation": "if_required",\n  "customer_details": null,\n  "customer_email": null,\n  "discounts": [],\n  "expires_at": 1746140996,\n  "invoice": null,\n  "invoice_creation": {\n    "enabled": false,\n    "invoice_data": {\n      "account_tax_ids": null,\n      "custom_fields": null,\n      "description": null,\n      "footer": null,\n      "issuer": null,\n      "metadata": {},\n      "rendering_options": null\n    }\n  },\n  "livemode": false,\n  "locale": null,\n  "metadata": {},\n  "mode": "payment",\n  "payment_intent": null,\n  "payment_link": null,\n  "payment_method_collection": "if_required",\n  "payment_method_configuration_details": null,\n  "payment_method_options": {\n    "card": {\n      "request_three_d_secure": "automatic"\n    }\n  },\n  "payment_method_types": [\n    "card"\n  ],\n  "payment_status": "unpaid",\n  "permissions": null,\n  "phone_number_collection": {\n    "enabled": false\n  },\n  "recovered_from": null,\n  "saved_payment_method_options": null,\n  "setup_intent": null,\n  "shipping_address_collection": null,\n  "shipping_cost": null,\n  "shipping_options": [],\n  "status": "open",\n  "submit_type": null,\n  "subscription": null,\n  "success_url": "http://127.0.0.1:8000/pay_success/",\n  "total_details": {\n    "amount_discount": 0,\n    "amount_shipping": 0,\n    "amount_tax": 0\n  },\n  "ui_mode": "hosted",\n  "url": "https://checkout.stripe.com/c/pay/cs_test_a1OLJWF0rfbOQwM94FXVysdqxwqOSHkDP4gfd9cZyxuBHREToNtlnineSL#fidkdWxOYHwnPyd1blpxYHZxWjA0V09MczBXcjRWRmdzZ2dOMH1%2FMzY9UElrfDRTZG8yU21BUkpjYm58UktkTDBhUGZkQT1yVjBCPGZSf1ExSGdnV0xHdjRAbGlTa2RUX2F9cWRTNUdkSExVNTV2a2NAMXZcYCcpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl",\n  "wallet_options": null\n}' message='API response body'
+link=https://dashboard.stripe.com/test/logs/req_PyIk4ACHeaqUzV message='Dashboard link for request'
+Internal Server Error: /pay_success/
+Traceback (most recent call last):
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\loader.py", line 47, in select_template
+    raise TemplateDoesNotExist(", ".join(template_name_list), chain=chain)
+django.template.exceptions.TemplateDoesNotExist: payment_success.html
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+message='Request to Stripe api' method=post url=https://api.stripe.com/v1/checkout/sessions
+api_version=2025-04-30.basil message='Post details' post_data=payment_method_types[0]=card&line_items[0][price_data][currency]=usd&line_items[0][price_data][product_data][name]=asdf&line_items[0][price_data][unit_amount]=300&line_items[0][quantity]=1&mode=payment&success_url=http%3A%2F%2F127.0.0.1%3A8000%2Fpay_success%2F&cancel_url=http%3A%2F%2F127.0.0.1%3A8000%2Fpay_cancel%2F
+Starting new HTTPS connection (1): api.stripe.com:443
+https://api.stripe.com:443 "POST /v1/checkout/sessions HTTP/1.1" 200 2592
+message='Stripe API response' path=https://api.stripe.com/v1/checkout/sessions response_code=200
+body='{\n  "id": "cs_test_a1K4VWnuZhPoOv65qwqSWN7r26Oo3sSmux0fgkTznx4b2jdOUb8n7wgavq",\n  "object": "checkout.session",\n  "adaptive_pricing": {\n    "enabled": true\n  },\n  "after_expiration": null,\n  "allow_promotion_codes": null,\n  "amount_subtotal": 300,\n  "amount_total": 300,\n  "automatic_tax": {\n    "enabled": false,\n    "liability": null,\n    "provider": null,\n    "status": null\n  },\n  "billing_address_collection": null,\n  "cancel_url": "http://127.0.0.1:8000/pay_cancel/",\n  "client_reference_id": null,\n  "client_secret": null,\n  "collected_information": null,\n  "consent": null,\n  "consent_collection": null,\n  "created": 1746054787,\n  "currency": "usd",\n  "currency_conversion": null,\n  "custom_fields": [],\n  "custom_text": {\n    "after_submit": null,\n    "shipping_address": null,\n    "submit": null,\n    "terms_of_service_acceptance": null\n  },\n  "customer": null,\n  "customer_creation": "if_required",\n  "customer_details": null,\n  "customer_email": null,\n  "discounts": [],\n  "expires_at": 1746141187,\n  "invoice": null,\n  "invoice_creation": {\n    "enabled": false,\n    "invoice_data": {\n      "account_tax_ids": null,\n      "custom_fields": null,\n      "description": null,\n      "footer": null,\n      "issuer": null,\n      "metadata": {},\n      "rendering_options": null\n    }\n  },\n  "livemode": false,\n  "locale": null,\n  "metadata": {},\n  "mode": "payment",\n  "payment_intent": null,\n  "payment_link": null,\n  "payment_method_collection": "if_required",\n  "payment_method_configuration_details": null,\n  "payment_method_options": {\n    "card": {\n      "request_three_d_secure": "automatic"\n    }\n  },\n  "payment_method_types": [\n    "card"\n  ],\n  "payment_status": "unpaid",\n  "permissions": null,\n  "phone_number_collection": {\n    "enabled": false\n  },\n  "recovered_from": null,\n  "saved_payment_method_options": null,\n  "setup_intent": null,\n  "shipping_address_collection": null,\n  "shipping_cost": null,\n  "shipping_options": [],\n  "status": "open",\n  "submit_type": null,\n  "subscription": null,\n  "success_url": "http://127.0.0.1:8000/pay_success/",\n  "total_details": {\n    "amount_discount": 0,\n    "amount_shipping": 0,\n    "amount_tax": 0\n  },\n  "ui_mode": "hosted",\n  "url": "https://checkout.stripe.com/c/pay/cs_test_a1K4VWnuZhPoOv65qwqSWN7r26Oo3sSmux0fgkTznx4b2jdOUb8n7wgavq#fidkdWxOYHwnPyd1blpxYHZxWjA0V09MczBXcjRWRmdzZ2dOMH1%2FMzY9UElrfDRTZG8yU21BUkpjYm58UktkTDBhUGZkQT1yVjBCPGZSf1ExSGdnV0xHdjRAbGlTa2RUX2F9cWRTNUdkSExVNTV2a2NAMXZcYCcpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl",\n  "wallet_options": null\n}' message='API response body'
+link=https://dashboard.stripe.com/test/logs/req_6YNm8zhX3bBkL2 message='Dashboard link for request'
+Internal Server Error: /pay_success/
+Traceback (most recent call last):
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\loader.py", line 47, in select_template
+    raise TemplateDoesNotExist(", ".join(template_name_list), chain=chain)
+django.template.exceptions.TemplateDoesNotExist: payment_success.html
+Watching for file changes with StatReloader
+message='Request to Stripe api' method=post url=https://api.stripe.com/v1/checkout/sessions
+api_version=2025-04-30.basil message='Post details' post_data=payment_method_types[0]=card&line_items[0][price_data][currency]=usd&line_items[0][price_data][product_data][name]=asdf&line_items[0][price_data][unit_amount]=300&line_items[0][quantity]=1&mode=payment&success_url=http%3A%2F%2F127.0.0.1%3A8000%2Fpay_success%2F&cancel_url=http%3A%2F%2F127.0.0.1%3A8000%2Fpay_cancel%2F
+Starting new HTTPS connection (1): api.stripe.com:443
+https://api.stripe.com:443 "POST /v1/checkout/sessions HTTP/1.1" 200 2592
+message='Stripe API response' path=https://api.stripe.com/v1/checkout/sessions response_code=200
+body='{\n  "id": "cs_test_a1SzNYUeuCPl1qLEkUgHR9mZkm2FXOcVZg1PKREYIkJ4s80iC0GGTawNbd",\n  "object": "checkout.session",\n  "adaptive_pricing": {\n    "enabled": true\n  },\n  "after_expiration": null,\n  "allow_promotion_codes": null,\n  "amount_subtotal": 300,\n  "amount_total": 300,\n  "automatic_tax": {\n    "enabled": false,\n    "liability": null,\n    "provider": null,\n    "status": null\n  },\n  "billing_address_collection": null,\n  "cancel_url": "http://127.0.0.1:8000/pay_cancel/",\n  "client_reference_id": null,\n  "client_secret": null,\n  "collected_information": null,\n  "consent": null,\n  "consent_collection": null,\n  "created": 1746055297,\n  "currency": "usd",\n  "currency_conversion": null,\n  "custom_fields": [],\n  "custom_text": {\n    "after_submit": null,\n    "shipping_address": null,\n    "submit": null,\n    "terms_of_service_acceptance": null\n  },\n  "customer": null,\n  "customer_creation": "if_required",\n  "customer_details": null,\n  "customer_email": null,\n  "discounts": [],\n  "expires_at": 1746141697,\n  "invoice": null,\n  "invoice_creation": {\n    "enabled": false,\n    "invoice_data": {\n      "account_tax_ids": null,\n      "custom_fields": null,\n      "description": null,\n      "footer": null,\n      "issuer": null,\n      "metadata": {},\n      "rendering_options": null\n    }\n  },\n  "livemode": false,\n  "locale": null,\n  "metadata": {},\n  "mode": "payment",\n  "payment_intent": null,\n  "payment_link": null,\n  "payment_method_collection": "if_required",\n  "payment_method_configuration_details": null,\n  "payment_method_options": {\n    "card": {\n      "request_three_d_secure": "automatic"\n    }\n  },\n  "payment_method_types": [\n    "card"\n  ],\n  "payment_status": "unpaid",\n  "permissions": null,\n  "phone_number_collection": {\n    "enabled": false\n  },\n  "recovered_from": null,\n  "saved_payment_method_options": null,\n  "setup_intent": null,\n  "shipping_address_collection": null,\n  "shipping_cost": null,\n  "shipping_options": [],\n  "status": "open",\n  "submit_type": null,\n  "subscription": null,\n  "success_url": "http://127.0.0.1:8000/pay_success/",\n  "total_details": {\n    "amount_discount": 0,\n    "amount_shipping": 0,\n    "amount_tax": 0\n  },\n  "ui_mode": "hosted",\n  "url": "https://checkout.stripe.com/c/pay/cs_test_a1SzNYUeuCPl1qLEkUgHR9mZkm2FXOcVZg1PKREYIkJ4s80iC0GGTawNbd#fidkdWxOYHwnPyd1blpxYHZxWjA0V09MczBXcjRWRmdzZ2dOMH1%2FMzY9UElrfDRTZG8yU21BUkpjYm58UktkTDBhUGZkQT1yVjBCPGZSf1ExSGdnV0xHdjRAbGlTa2RUX2F9cWRTNUdkSExVNTV2a2NAMXZcYCcpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl",\n  "wallet_options": null\n}' message='API response body'
+link=https://dashboard.stripe.com/test/logs/req_Xadii8rq1AHTkV message='Dashboard link for request'
+Internal Server Error: /pay_success/
+Traceback (most recent call last):
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "C:\Users\bmlm1\School Shit\Intro to Software Engineering\CSCI4830-TradingTreasure-Stripe\venv\Lib\site-packages\django\template\loader.py", line 47, in select_template
+    raise TemplateDoesNotExist(", ".join(template_name_list), chain=chain)
+django.template.exceptions.TemplateDoesNotExist: payment_success.html
+Watching for file changes with StatReloader
+message='Request to Stripe api' method=post url=https://api.stripe.com/v1/checkout/sessions
+api_version=2025-04-30.basil message='Post details' post_data=payment_method_types[0]=card&line_items[0][price_data][currency]=usd&line_items[0][price_data][product_data][name]=asdf&line_items[0][price_data][unit_amount]=300&line_items[0][quantity]=1&mode=payment&success_url=http%3A%2F%2F127.0.0.1%3A8000%2Fpay_success%2F&cancel_url=http%3A%2F%2F127.0.0.1%3A8000%2Fpay_cancel%2F
+Starting new HTTPS connection (1): api.stripe.com:443
+https://api.stripe.com:443 "POST /v1/checkout/sessions HTTP/1.1" 200 2592
+message='Stripe API response' path=https://api.stripe.com/v1/checkout/sessions response_code=200
+body='{\n  "id": "cs_test_a1MtDgpOjWWCQCgKqyf1pa6jxHOSeeBghtHBc5PB1Cqt34axsdwbcx8ri0",\n  "object": "checkout.session",\n  "adaptive_pricing": {\n    "enabled": true\n  },\n  "after_expiration": null,\n  "allow_promotion_codes": null,\n  "amount_subtotal": 300,\n  "amount_total": 300,\n  "automatic_tax": {\n    "enabled": false,\n    "liability": null,\n    "provider": null,\n    "status": null\n  },\n  "billing_address_collection": null,\n  "cancel_url": "http://127.0.0.1:8000/pay_cancel/",\n  "client_reference_id": null,\n  "client_secret": null,\n  "collected_information": null,\n  "consent": null,\n  "consent_collection": null,\n  "created": 1746055860,\n  "currency": "usd",\n  "currency_conversion": null,\n  "custom_fields": [],\n  "custom_text": {\n    "after_submit": null,\n    "shipping_address": null,\n    "submit": null,\n    "terms_of_service_acceptance": null\n  },\n  "customer": null,\n  "customer_creation": "if_required",\n  "customer_details": null,\n  "customer_email": null,\n  "discounts": [],\n  "expires_at": 1746142260,\n  "invoice": null,\n  "invoice_creation": {\n    "enabled": false,\n    "invoice_data": {\n      "account_tax_ids": null,\n      "custom_fields": null,\n      "description": null,\n      "footer": null,\n      "issuer": null,\n      "metadata": {},\n      "rendering_options": null\n    }\n  },\n  "livemode": false,\n  "locale": null,\n  "metadata": {},\n  "mode": "payment",\n  "payment_intent": null,\n  "payment_link": null,\n  "payment_method_collection": "if_required",\n  "payment_method_configuration_details": null,\n  "payment_method_options": {\n    "card": {\n      "request_three_d_secure": "automatic"\n    }\n  },\n  "payment_method_types": [\n    "card"\n  ],\n  "payment_status": "unpaid",\n  "permissions": null,\n  "phone_number_collection": {\n    "enabled": false\n  },\n  "recovered_from": null,\n  "saved_payment_method_options": null,\n  "setup_intent": null,\n  "shipping_address_collection": null,\n  "shipping_cost": null,\n  "shipping_options": [],\n  "status": "open",\n  "submit_type": null,\n  "subscription": null,\n  "success_url": "http://127.0.0.1:8000/pay_success/",\n  "total_details": {\n    "amount_discount": 0,\n    "amount_shipping": 0,\n    "amount_tax": 0\n  },\n  "ui_mode": "hosted",\n  "url": "https://checkout.stripe.com/c/pay/cs_test_a1MtDgpOjWWCQCgKqyf1pa6jxHOSeeBghtHBc5PB1Cqt34axsdwbcx8ri0#fidkdWxOYHwnPyd1blpxYHZxWjA0V09MczBXcjRWRmdzZ2dOMH1%2FMzY9UElrfDRTZG8yU21BUkpjYm58UktkTDBhUGZkQT1yVjBCPGZSf1ExSGdnV0xHdjRAbGlTa2RUX2F9cWRTNUdkSExVNTV2a2NAMXZcYCcpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl",\n  "wallet_options": null\n}' message='API response body'
+link=https://dashboard.stripe.com/test/logs/req_1dxcQGEYWoRFOl message='Dashboard link for request'
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Not Found: /static/assets/css/font-awesome.min.css
+Watching for file changes with StatReloader
+Not Found: /static/assets/css/font-awesome.min.css
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader

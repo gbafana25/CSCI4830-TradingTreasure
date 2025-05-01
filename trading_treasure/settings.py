@@ -82,7 +82,7 @@ ROOT_URLCONF = 'trading_treasure.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [str(BASE_DIR / 'site_app' / 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

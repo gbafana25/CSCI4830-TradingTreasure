@@ -61,7 +61,13 @@
                             <p>Posted: {{ prod.date_posted }}</p>
                         </section>
 						<ul class="actions special">
-							<li><a href="{% url 'place-order' prod.id %}" class="button">Confirm Purchase</a></li>
+							<li>
+								<form method="post" action="{% url 'pay' %}">
+        								{% csrf_token %}
+        								<input type="hidden" name="product_id" value="{{ prod.id }}">
+        								<button type="submit" class="button">Claim Yer Treasure</button>
+    								</form>
+							</li>
 						</ul>
 
 					</div>
@@ -83,9 +89,3 @@
 
 	</body>
 </html>
-
-<form method="post" action="{% url 'pay' %}">
-    {% csrf_token %}
-    <input type="hidden" name="product_id" value="{{ prod.id }}">
-    <button type="submit">Buy with Stripe</button>
-</form>
