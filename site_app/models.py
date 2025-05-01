@@ -42,9 +42,15 @@ class Product(models.Model):
     date_posted = models.DateTimeField(auto_now_add=True)
     buyer_address = models.ForeignKey(Address, on_delete=models.SET_NULL, null=True, blank=True)
     is_bought = models.BooleanField(default=False)
+    image = models.ImageField(upload_to='product_images/', null=True, blank=True)
 
     def __str__(self):
         return self.name
+
+    def get_image_url(self):
+        if self.image:
+            return self.image.url
+        return '/productionfiles/images/placeholder.jpg'
 
 
 class Order(models.Model):
