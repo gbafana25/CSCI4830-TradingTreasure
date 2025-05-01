@@ -62,19 +62,23 @@
 								</form>
 
 								<h2>Orders</h2>
-								<section class="posts">
+								<ul class="posts">
 									{% for order in orders %}
+									<li>
 									<article>
 										<header>
 											<h3>{{ order.product.name }}</h3>
 											<p><strong>From: {{ order.buyer.username }}</strong></p>
 										</header>
 										<p>{{ order.time_ordered }}</p>
+										<a href="{% url 'confirm-order' order.id %}" class="button">Confirm Order</a>
+										
 									</article>
+									</li>
 									{% empty %}
 									<p>No orders made</p>
 									{% endfor %}
-								</section>
+								</ul>
 							</div>
 
 							<!-- Update Address Button 

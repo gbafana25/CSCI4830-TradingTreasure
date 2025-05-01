@@ -35,7 +35,8 @@ def signup(request):
 def profile(request):
     u = request.user
     addr_form = AddressForm()
-    return render(request, 'site_app/elements.html', {'profile': u, 'form': addr_form})
+    account_orders = Order.objects.filter(seller=request.user.id)
+    return render(request, 'site_app/elements.html', {'profile': u, 'form': addr_form, 'orders': account_orders})
 
 
 @login_required
@@ -92,7 +93,7 @@ def page2(request):
                 [request.user.email],
                 fail_silently=False
             )
-            home(request)
+            return home(request)
     else:
         product_form = ProductForm()
     return render(request, 'site_app/generic.html', {'form': product_form})
@@ -107,7 +108,8 @@ def page3(request):
 @login_required
 def buy_item(request, id):
     prod = Product.objects.get(id=id)
-    return render(request, 'site_app/buy_item.html', {'prod': prod})
+    form = MessageOwnerForm()
+    return render(request, 'site_app/buy_item.html', {'prod': prod, 'form': form})
 
 @login_required
 def place_order(request, id):
@@ -139,11 +141,29 @@ def message_owner(request, id):
     if request.method == 'POST':
         mform = MessageOwnerForm(request.POST)
         if mform.is_valid():
-            prod = Product.objects.filter(id=id)
+            prod = Product.objects.get(id=id)
             send_mail(
             "Message from "+request.user.username+" - Trading Treasure",
-            mform.message,
+            mform.cleaned_data['message'],
             "tradingtreasure@example.com",
             [prod.owner.email],
             fail_silently=False
         )
+        form = MessageOwnerForm()
+        return render(request, 'site_app/buy_item.html', {'prod': prod, 'form': form})
+    else:
+        form = MessageOwnerForm()
+        return render(request, 'site_app/buy_item.html', {'prod': prod, 'form': form})
+    
+@login_required
+def confirm_order(request, id):
+    order = Order.objects.get(id=id)
+    send_mail(
+        "Order confirmation from "+request.user.username+" - Trading Treasure",
+        "Order confirmation for "+order.product.name,
+        "tradingtreasure@example.com",
+        [order.buyer.email],
+        fail_silently=False
+    )
+    order.delete()
+    return profile(request)
