@@ -11,5 +11,6 @@ urlpatterns = [
     path('page2/', views.page2, name="page2"),
     path('page3/', views.page3, name="page3"),
     path('buy-item/<uuid:id>/', views.buy_item, name="buy-item"),
-    path('place-order/<uuid:id>/', views.place_order, name="place-order")
+    path('place-order/<uuid:id>/', views.place_order, name="place-order"),
+    path('message-owner/<uuid:id>/', views.message_owner, name="message-owner")
 ]

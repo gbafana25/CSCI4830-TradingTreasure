@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import SignupForm, AddressForm, ProductForm
+from .forms import SignupForm, AddressForm, ProductForm, MessageOwnerForm
 from .models import User, Address, Product, Order
 from django.http import HttpResponse
 from django.core.paginator import Paginator
@@ -133,3 +133,17 @@ def place_order(request, id):
         fail_silently=False
     )
     return home(request)
+
+@login_required
+def message_owner(request, id):
+    if request.method == 'POST':
+        mform = MessageOwnerForm(request.POST)
+        if mform.is_valid():
+            prod = Product.objects.filter(id=id)
+            send_mail(
+            "Message from "+request.user.username+" - Trading Treasure",
+            mform.message,
+            "tradingtreasure@example.com",
+            [prod.owner.email],
+            fail_silently=False
+        )

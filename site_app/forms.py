@@ -27,6 +27,8 @@ class ProductForm(forms.Form):
     category = forms.CharField()
     buyer_address = forms.CharField()
    
+class MessageOwnerForm(forms.Form):
+    message = forms.CharField()
     
     #fields = ['name', 'price', 'category', 'owner', 'buyer_address', 'is_bought']
     #widgets = {
