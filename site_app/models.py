@@ -57,3 +57,11 @@ class Order(models.Model):
 
     def __str__(self):
         return f"Order for {self.product.name} by {self.buyer.username}"
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    time_ordered = models.DateTimeField(auto_now_add=True)
+    buyer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name="orders_bought")
+    seller = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name="orders_sold")
+    buyer_address = models.ForeignKey(Address, on_delete=models.SET_NULL, null=True, blank=True)
+
+    def __str__(self):
+        return f"Order {self.id} - {self.product.name}"
