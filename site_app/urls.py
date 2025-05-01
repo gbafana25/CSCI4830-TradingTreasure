@@ -1,6 +1,5 @@
 from django.urls import path, include
 from . import views
-from .views import PaymentCheckoutView, SuccessView, CancelView, stripe_webhook
 
 urlpatterns = [
 	path('accounts/', include('django.contrib.auth.urls')),
@@ -15,8 +14,4 @@ urlpatterns = [
     path('place-order/<uuid:id>/', views.place_order, name="place-order"),
     path('message-owner/<uuid:id>/', views.message_owner, name="message-owner"),
     path('confirm-order/<int:id>', views.confirm_order, name='confirm-order'),
-    path('pay/', PaymentCheckoutView.as_view(), name='pay'),
-    path('pay_success/', SuccessView.as_view(), name='pay_success'),
-    path('pay_cancel/', CancelView.as_view(), name='pay_cancel'),
-    path('webhook/', stripe_webhook, name='stripe-webhook'),
 ]

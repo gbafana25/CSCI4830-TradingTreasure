@@ -14,8 +14,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 from django.core.mail import send_mail
 
-import stripe
-
 
 def signup(request):
     if request.method == 'POST':
