@@ -14,6 +14,7 @@ class SignupForm(forms.Form):
     state = forms.CharField()
     zip_code = forms.IntegerField()
 
+
 class AddressForm(forms.Form):
         address_line1 = forms.CharField()
         address_line2 = forms.CharField()
@@ -31,10 +32,13 @@ class ProductForm(forms.Form):
     price = forms.FloatField()
     category = forms.CharField()
     buyer_address = forms.CharField()
+
+class StripePaymentForm(forms.Form):
+    product_id = forms.UUIDField(widget=forms.HiddenInput())
+
    
     
     #fields = ['name', 'price', 'category', 'owner', 'buyer_address', 'is_bought']
     #widgets = {
     #    'category': forms.Textarea(attrs={'placeholder': 'Enter categories separated by semicolons'}),
     #    }
-
