@@ -31,6 +31,10 @@ class ProductForm(forms.Form):
     price = forms.FloatField()
     category = forms.CharField()
     buyer_address = forms.CharField()
+
+class StripePaymentForm(forms.Form):
+    product_id = forms.UUIDField(widget=forms.HiddenInput())
+
    
 class MessageOwnerForm(forms.Form):
     message = forms.CharField()
@@ -39,4 +43,3 @@ class MessageOwnerForm(forms.Form):
     #widgets = {
     #    'category': forms.Textarea(attrs={'placeholder': 'Enter categories separated by semicolons'}),
     #    }
-

@@ -1,0 +1,18 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /i>
+    <link rel="stylesheet" href={% static 'assets/css/main.css' %} />
+    <noscript><link rel="stylesheet" href={% static 'assets/css/noscript.css' %} /></noscript>
+  </head>
+  <body>
+	<h1>Payment Successful!</h1>
+	<p>Thank you for your purchase.</p>
+
+	<a href="{% url 'home' %}" class="button" style="text-decoration: none;">
+		<button>Go to Homepage</button>
+	</a>
+  </body>
+</html>
