@@ -1,38 +1,53 @@
 from django.shortcuts import render, redirect
-from .forms import SignupForm, AddressForm, ProductForm
+from .forms import SignupForm, AddressForm, ProductForm, StripePaymentForm
 from .models import User, Address, Product, Order
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.core.paginator import Paginator
+from django.conf import settings
+from django.views import View
+from django.views.generic import TemplateView
+from django.views.decorators.csrf import csrf_exempt
+from django.urls import reverse
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 from django.core.mail import send_mail
 
-import logging
-#log = logging.getLogger(__name__)
+import stripe
 
-# Create your views here.
+
 def signup(request):
     if request.method == 'POST':
         signupform = SignupForm(request.POST)
 
         if signupform.is_valid():
-            #print(signupform.cleaned_data)
-            new_addr = Address.objects.create(address_line1=signupform.cleaned_data['address_line1'], address_line2=signupform.cleaned_data['address_line2'], city=signupform.cleaned_data['city'], state=signupform.cleaned_data['state'], zip_code=signupform.cleaned_data['zip_code'])
+            new_addr = Address.objects.create(
+                address_line1=signupform.cleaned_data['address_line1'],
+                address_line2=signupform.cleaned_data['address_line2'],
+                city=signupform.cleaned_data['city'],
+                state=signupform.cleaned_data['state'],
+                zip_code=signupform.cleaned_data['zip_code']
+            )
             new_addr.save()
-            new_user = User.objects.create_user(signupform.cleaned_data['username'], signupform.cleaned_data['email'], signupform.cleaned_data['password'])
+
+            new_user = User.objects.create_user(
+                signupform.cleaned_data['username'],
+                signupform.cleaned_data['email'],
+                signupform.cleaned_data['password']
+            )
             new_user.location = signupform.cleaned_data['location']
             new_user.phone_number = signupform.cleaned_data['phone_number']
             new_user.address = new_addr
             new_user.save()
-            #new_user = signupform.save()
+
             login(request, new_user)
             addr_form = AddressForm()
             return render(request, 'site_app/elements.html', {'profile': new_user, 'form': addr_form})
-        
     else:
         signupform = SignupForm()
+
     return render(request, 'site_app/signup.html', {'form': signupform})
+
 
 @login_required
 def profile(request):
@@ -47,92 +62,161 @@ def update_address(request):
     if request.method == 'POST':
         addr_form = AddressForm(request.POST)
         if addr_form.is_valid():
-            addr = Address.objects.create(address_line1=addr_form.cleaned_data['address_line1'], address_line2=addr_form.cleaned_data['address_line2'], city=addr_form.cleaned_data['city'], state=addr_form.cleaned_data['state'], zip_code=addr_form.cleaned_data['zip_code'])
+            addr = Address.objects.create(
+                address_line1=addr_form.cleaned_data['address_line1'],
+                address_line2=addr_form.cleaned_data['address_line2'],
+                city=addr_form.cleaned_data['city'],
+                state=addr_form.cleaned_data['state'],
+                zip_code=addr_form.cleaned_data['zip_code']
+            )
             u.address = addr
             u.save()
-            home(request)
+            return home(request)
     else:
         addr_form = AddressForm()
 
     return render(request, 'site_app/profile.html', {'profile': u, 'form': addr_form})
 
-def home(request):
-    #buy page
-    products = Product.objects.filter(is_bought=False)
-    product_list = []
-    for p in products:
-        product_list.append(p)
-    paginator = Paginator(product_list, 10)
 
+def home(request):
+    products = Product.objects.filter(is_bought=False)
+    paginator = Paginator(products, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-
     return render(request, 'site_app/index.html', {
-        'products': product_list, 
+        'products': products,
         'page_obj': page_obj
     })
 
+
 def page2(request):
-    #sell page
-    #generic.html
     if request.method == 'POST':
         product_form = ProductForm(request.POST)
-        #log.debug(product_form)
         if product_form.is_valid():
-            # right now just using the first line of the address to fetch the Address database object
-            # Product buyer_address must be the database object
             line1 = product_form.cleaned_data['buyer_address'].split(',')[0]
-            print(line1)
-            addr = Address.objects.filter(address_line1=line1)
-           # print(addr)
-            p = Product(name=product_form.cleaned_data['name'], price=product_form.cleaned_data['price'], category=product_form.cleaned_data['category'], owner=request.user, buyer_address=addr[0], is_bought=False)
+            addr = Address.objects.filter(address_line1=line1).first()
+
+            p = Product.objects.create(
+                name=product_form.cleaned_data['name'],
+                price=product_form.cleaned_data['price'],
+                category=product_form.cleaned_data['category'],
+                owner=request.user,
+                buyer_address=addr,
+                is_bought=False
+            )
             p.save()
+
             send_mail(
                 "Product listed - Trading Treasure",
-                "Your product "+p.name+" has  been listed for $"+str(p.price),
+                f"Your product {p.name} has been listed for ${p.price}",
                 "tradingtreasure@example.com",
                 [request.user.email],
                 fail_silently=False
             )
-            home(request)
+
+            return home(request)
     else:
         product_form = ProductForm()
+
     return render(request, 'site_app/generic.html', {'form': product_form})
 
-def page3(request):
-    #accounts page
-    #elements.html
-    account_orders = Order.objects.filter(seller=request.user.id)
 
+def page3(request):
+    account_orders = Order.objects.filter(buyer=request.user)
     return render(request, 'site_app/elements.html', {'orders': account_orders})
+
 
 @login_required
 def buy_item(request, id):
     prod = Product.objects.get(id=id)
-    return render(request, 'site_app/buy_item.html', {'prod': prod})
+    form = StripePaymentForm(initial={'product_id': prod.id})
+    return render(request, 'site_app/buy_item.html', {'prod': prod, 'stripe_form': form})
+
 
 @login_required
 def place_order(request, id):
     prod = Product.objects.get(id=id)
-    order_obj = Order.objects.create(product=prod, buyer=request.user, seller=prod.owner, buyer_address=request.user.address)
+    order_obj = Order.objects.create(
+        product=prod,
+        buyer=request.user,
+        seller=prod.owner,
+        buyer_address=request.user.address
+    )
     prod.is_bought = True
     prod.save()
-    order_obj.save()
-    # send email to buyer to confirm purchase
+
     send_mail(
         "Product purchased - Trading Treasure",
-        "Your product "+prod.name+" has has been purchased by "+request.user.username+" for $"+str(prod.price),
+        f"Your product {prod.name} has been purchased by {request.user.username} for ${prod.price}",
         "tradingtreasure@example.com",
         [order_obj.seller.email],
         fail_silently=False
     )
-
     send_mail(
         "Product purchased - Trading Treasure",
-        "You purchased "+prod.name+" for $"+str(prod.price),
+        f"You purchased {prod.name} for ${prod.price}",
         "tradingtreasure@example.com",
         [request.user.email],
         fail_silently=False
     )
+
     return home(request)
+
+
+# Stripe payment logic
+stripe.api_key = settings.STRIPE_TEST_SECRET_KEY
+
+class PaymentCheckoutView(View):
+    def post(self, request, *args, **kwargs):
+        product_id = request.POST.get('product_id')
+        try:
+            product = Product.objects.get(id=product_id)
+        except Product.DoesNotExist:
+            return JsonResponse({'error': 'Product not found'}, status=404)
+
+        checkout_session = stripe.checkout.Session.create(
+            payment_method_types=['card'],
+            line_items=[{
+                'price_data': {
+                    'currency': 'usd',
+                    'product_data': {'name': product.name},
+                    'unit_amount': int(product.price * 100),
+                },
+                'quantity': 1,
+            }],
+            mode='payment',
+            success_url=request.build_absolute_uri(reverse('pay_success')),
+            cancel_url=request.build_absolute_uri(reverse('pay_cancel')),
+        )
+        return redirect(checkout_session.url, code=303)
+
+
+class SuccessView(TemplateView):
+    template_name = 'site_app/payment_success.html'
+
+
+class CancelView(TemplateView):
+    template_name = 'site_app/payment_cancel.html'
+
+
+@csrf_exempt
+def stripe_webhook(request):
+    payload = request.body
+    sig_header = request.META.get('HTTP_STRIPE_SIGNATURE')
+    endpoint_secret = settings.STRIPE_ENDPOINT_SECRET
+
+    try:
+        event = stripe.Webhook.construct_event(
+            payload, sig_header, endpoint_secret
+        )
+    except ValueError:
+        return JsonResponse({'error': 'Invalid payload'}, status=400)
+    except stripe.error.SignatureVerificationError:
+        return JsonResponse({'error': 'Invalid signature'}, status=400)
+
+    if event['type'] == 'checkout.session.completed':
+        session = event['data']['object']
+        print('✅ Payment succeeded for session:', session['id'])
+
+    return JsonResponse({'status': 'success'}, status=200)

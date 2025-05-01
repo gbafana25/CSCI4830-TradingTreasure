@@ -1,0 +1,8 @@
+<script src="https://js.stripe.com/v3/"></script>
+
+<form method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="product_id" value="{{ product.id }}">
+    <button type="submit" id="checkout-button">Checkout</button>
+</form>
+
