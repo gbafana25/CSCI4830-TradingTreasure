@@ -121,7 +121,7 @@ def page2(request):
 
     return render(request, 'site_app/generic.html', {'form': product_form})
 
-
+@login_required
 def page3(request):
     account_orders = Order.objects.filter(seller=request.user)
     return render(request, 'site_app/elements.html', {'orders': account_orders})

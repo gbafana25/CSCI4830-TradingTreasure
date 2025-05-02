@@ -48,4 +48,4 @@ software dev. group project
 - 1st (for local dev. and ec2 instance), follow these instructions for installing stripe: https://docs.stripe.com/stripe-cli?install-method=apt 
 - then also install `stripe` and `dotenv` python dependency
 - on the command line run `stripe login`, login through browser (copy link if needed), **for EC2 instance use tradingtreasure gmail account**
-- run `stripe listen --forward (address)/webhook`, webhook token value should be updated in settings.py
+- run `stripe listen --forward-to (address)/webhook`, webhook token value should be updated in settings.py
