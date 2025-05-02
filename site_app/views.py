@@ -123,7 +123,7 @@ def page2(request):
 
 
 def page3(request):
-    account_orders = Order.objects.filter(buyer=request.user)
+    account_orders = Order.objects.filter(seller=request.user)
     return render(request, 'site_app/elements.html', {'orders': account_orders})
 
 
@@ -186,14 +186,19 @@ class PaymentCheckoutView(View):
                 'quantity': 1,
             }],
             mode='payment',
-            success_url=request.build_absolute_uri(reverse('pay_success')),
+            success_url='http://localhost:8000/pay_success?id='+str(product_id),
             cancel_url=request.build_absolute_uri(reverse('pay_cancel')),
         )
         return redirect(checkout_session.url, code=303)
 
 
-class SuccessView(TemplateView):
+class SuccessView(View):
     template_name = 'site_app/payment_success.html'
+    def get(self, request):
+        prod_id = request.GET.get("id")
+        product = Product.objects.get(id=prod_id)
+        product.delete()
+        return home(request)
 
 
 class CancelView(TemplateView):
