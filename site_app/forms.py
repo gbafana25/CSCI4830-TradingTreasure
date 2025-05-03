@@ -33,6 +33,9 @@ class ProductForm(forms.Form):
     category = forms.CharField()
     buyer_address = forms.CharField()
 
+class MessageSellerForm(forms.Form):
+    message = forms.CharField()
+
 class StripePaymentForm(forms.Form):
     product_id = forms.UUIDField(widget=forms.HiddenInput())
 

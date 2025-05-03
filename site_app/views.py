@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import SignupForm, AddressForm, ProductForm, StripePaymentForm
+from .forms import SignupForm, AddressForm, ProductForm, StripePaymentForm, MessageSellerForm
 from .models import User, Address, Product, Order
 from django.http import HttpResponse, JsonResponse
 from django.core.paginator import Paginator
@@ -115,7 +115,7 @@ def page2(request):
                 fail_silently=False
             )
 
-            return home(request)
+            return redirect('/')
     else:
         product_form = ProductForm()
 
@@ -131,8 +131,27 @@ def page3(request):
 def buy_item(request, id):
     prod = Product.objects.get(id=id)
     form = StripePaymentForm(initial={'product_id': prod.id})
-    return render(request, 'site_app/buy_item.html', {'prod': prod, 'stripe_form': form})
+    msgform = MessageSellerForm()
+    return render(request, 'site_app/buy_item.html', {'prod': prod, 'stripe_form': form, 'msgform': msgform})
 
+@login_required
+def message_owner(request, id):
+    if request.method == 'POST':
+        mform = MessageSellerForm(request.POST)
+        if mform.is_valid():
+            prod = Product.objects.get(id=id)
+            send_mail(
+            "Message from "+request.user.username+" - Trading Treasure",
+            mform.cleaned_data['message'],
+            "tradingtreasure@example.com",
+            [prod.owner.email],
+            fail_silently=False
+        )
+        form = MessageSellerForm()
+        return render(request, 'site_app/buy_item.html', {'prod': prod, 'msgform': form})
+    else:
+        form = MessageSellerForm()
+        return render(request, 'site_app/buy_item.html', {'prod': prod, 'msgform': form})
 
 @login_required
 def place_order(request, id):
@@ -186,7 +205,8 @@ class PaymentCheckoutView(View):
                 'quantity': 1,
             }],
             mode='payment',
-            success_url='http://localhost:8000/pay_success?id='+str(product_id),
+            #success_url='http://localhost:8000/pay_success?id='+str(product_id),
+            success_url=request.build_absolute_uri(reverse('pay_success')+"?id="+str(product_id)),
             cancel_url=request.build_absolute_uri(reverse('pay_cancel')),
         )
         return redirect(checkout_session.url, code=303)
@@ -197,8 +217,31 @@ class SuccessView(View):
     def get(self, request):
         prod_id = request.GET.get("id")
         product = Product.objects.get(id=prod_id)
-        product.delete()
-        return home(request)
+        order_obj = Order.objects.create(
+            product=product,
+            buyer=request.user,
+            seller=product.owner,
+            buyer_address=request.user.address
+        )
+        product.is_bought = True
+        product.save()
+
+        send_mail(
+            "Product purchased - Trading Treasure",
+            f"Your product {product.name} has been purchased by {request.user.username} for ${product.price}",
+            "tradingtreasure@example.com",
+            [order_obj.seller.email],
+            fail_silently=False
+        )
+        send_mail(
+            "Product purchased - Trading Treasure",
+            f"You purchased {product.name} for ${product.price}",
+            "tradingtreasure@example.com",
+            [request.user.email],
+            fail_silently=False
+        )
+
+        return redirect('/')
 
 
 class CancelView(TemplateView):
