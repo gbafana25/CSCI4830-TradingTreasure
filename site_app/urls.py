@@ -14,8 +14,8 @@ urlpatterns = [
     path('place-order/<uuid:id>/', views.place_order, name="place-order"),
     path('message-owner/<uuid:id>/', views.message_owner, name="message-owner"),
     path('confirm-order/<uuid:id>/', views.confirm_order, name="confirm-order"),
-    path('pay/', PaymentCheckoutView.as_view(), name='pay'),
-    path('pay_success/', SuccessView.as_view(), name='pay_success'),
-    path('pay_cancel/', CancelView.as_view(), name='pay_cancel'),
-    path('webhook/', stripe_webhook, name='stripe-webhook'),
+    path('pay/', views.PaymentCheckoutView.as_view(), name='pay'),
+    path('pay_success', views.SuccessView.as_view(), name='pay_success'),
+    path('pay_cancel', views.CancelView.as_view(), name='pay_cancel'),
+    path('webhook/', views.stripe_webhook, name='stripe-webhook'),
 ]
