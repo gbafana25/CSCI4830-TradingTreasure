@@ -15,7 +15,6 @@ from django.core.mail import send_mail
 
 import stripe
 
-
 def signup(request):
     if request.method == 'POST':
         signupform = SignupForm(request.POST)
@@ -53,7 +52,8 @@ def signup(request):
 def profile(request):
     u = request.user
     addr_form = AddressForm()
-    return render(request, 'site_app/elements.html', {'profile': u, 'form': addr_form})
+    account_orders = Order.objects.filter(seller=request.user.id)
+    return render(request, 'site_app/elements.html', {'profile': u, 'form': addr_form, 'orders': account_orders})
 
 
 @login_required
@@ -114,7 +114,6 @@ def page2(request):
                 [request.user.email],
                 fail_silently=False
             )
-
             return redirect('/')
     else:
         product_form = ProductForm()

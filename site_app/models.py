@@ -46,6 +46,11 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+    def get_image_url(self):
+        if self.image:
+            return self.image.url
+        return '/productionfiles/images/placeholder.jpg'
+
 
 class Order(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -55,9 +60,5 @@ class Order(models.Model):
     seller = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name="orders_sold")
     buyer_address = models.ForeignKey(Address, on_delete=models.SET_NULL, null=True, blank=True)
 
-
-    def __str__(self):
-        return f"Order for {self.product.name} by {self.buyer.username}"
- 
     def __str__(self):
         return f"Order {self.id} - {self.product.name}"

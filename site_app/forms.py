@@ -14,7 +14,6 @@ class SignupForm(forms.Form):
     state = forms.CharField()
     zip_code = forms.IntegerField()
 
-
 class AddressForm(forms.Form):
         address_line1 = forms.CharField()
         address_line2 = forms.CharField()
@@ -40,6 +39,8 @@ class StripePaymentForm(forms.Form):
     product_id = forms.UUIDField(widget=forms.HiddenInput())
 
    
+class MessageOwnerForm(forms.Form):
+    message = forms.CharField()
     
     #fields = ['name', 'price', 'category', 'owner', 'buyer_address', 'is_bought']
     #widgets = {

@@ -1,6 +1,5 @@
 from django.urls import path, include
 from . import views
-from .views import PaymentCheckoutView, SuccessView, CancelView, stripe_webhook
 
 urlpatterns = [
 	path('accounts/', include('django.contrib.auth.urls')),
