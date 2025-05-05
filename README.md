@@ -43,3 +43,9 @@ software dev. group project
     - https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu
     - make sure permissions are set correctly (ubuntu:www-data): https://stackoverflow.com/questions/55093622/gunicorn-socket-failed-with-result-service-start-limit-hit
     - make sure static paths set in `nginx.conf` and `trading_treasure/settings.py` correctly (are good now): https://realpython.com/django-nginx-gunicorn/#incorporating-nginx
+
+## Setting up Stripe
+- 1st (for local dev. and ec2 instance), follow these instructions for installing stripe: https://docs.stripe.com/stripe-cli?install-method=apt 
+- then also install `stripe` and `dotenv` python dependency
+- on the command line run `stripe login`, login through browser (copy link if needed), **for EC2 instance use tradingtreasure gmail account**
+- run `stripe listen --forward-to (address)/webhook`, webhook token value should be updated in settings.py

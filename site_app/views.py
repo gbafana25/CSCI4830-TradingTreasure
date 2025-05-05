@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import SignupForm, AddressForm, ProductForm, MessageOwnerForm, StripePaymentForm
-
+from .forms import SignupForm, AddressForm, ProductForm, StripePaymentForm, MessageSellerForm
 from .models import User, Address, Product, Order
 from django.http import HttpResponse, JsonResponse
 from django.core.paginator import Paginator
@@ -14,6 +13,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 from django.core.mail import send_mail
 
+import stripe
 
 def signup(request):
     if request.method == 'POST':
@@ -114,26 +114,43 @@ def page2(request):
                 [request.user.email],
                 fail_silently=False
             )
-            return home(request)
+            return redirect('/')
     else:
         product_form = ProductForm()
 
     return render(request, 'site_app/generic.html', {'form': product_form})
 
-
+@login_required
 def page3(request):
-    account_orders = Order.objects.filter(buyer=request.user)
+    account_orders = Order.objects.filter(seller=request.user)
     return render(request, 'site_app/elements.html', {'orders': account_orders})
 
 
 @login_required
 def buy_item(request, id):
     prod = Product.objects.get(id=id)
-    form = MessageOwnerForm()
-    return render(request, 'site_app/buy_item.html', {'prod': prod, 'form': form})
-    #form = StripePaymentForm(initial={'product_id': prod.id})
-    return render(request, 'site_app/buy_item.html', {'prod': prod, 'stripe_form': form})
+    form = StripePaymentForm(initial={'product_id': prod.id})
+    msgform = MessageSellerForm()
+    return render(request, 'site_app/buy_item.html', {'prod': prod, 'stripe_form': form, 'msgform': msgform})
 
+@login_required
+def message_owner(request, id):
+    if request.method == 'POST':
+        mform = MessageSellerForm(request.POST)
+        if mform.is_valid():
+            prod = Product.objects.get(id=id)
+            send_mail(
+            "Message from "+request.user.username+" - Trading Treasure",
+            mform.cleaned_data['message'],
+            "tradingtreasure@example.com",
+            [prod.owner.email],
+            fail_silently=False
+        )
+        form = MessageSellerForm()
+        return render(request, 'site_app/buy_item.html', {'prod': prod, 'msgform': form})
+    else:
+        form = MessageSellerForm()
+        return render(request, 'site_app/buy_item.html', {'prod': prod, 'msgform': form})
 
 @login_required
 def place_order(request, id):
@@ -161,26 +178,9 @@ def place_order(request, id):
         [request.user.email],
         fail_silently=False
     )
-    
-@login_required
-def message_owner(request, id):
-    if request.method == 'POST':
-        mform = MessageOwnerForm(request.POST)
-        if mform.is_valid():
-            prod = Product.objects.get(id=id)
-            send_mail(
-            "Message from "+request.user.username+" - Trading Treasure",
-            mform.cleaned_data['message'],
-            "tradingtreasure@example.com",
-            [prod.owner.email],
-            fail_silently=False
-        )
-        form = MessageOwnerForm()
-        return render(request, 'site_app/buy_item.html', {'prod': prod, 'form': form})
-    else:
-        form = MessageOwnerForm()
-        return render(request, 'site_app/buy_item.html', {'prod': prod, 'form': form})
-    
+
+    return home(request)
+
 @login_required
 def confirm_order(request, id):
     order = Order.objects.get(id=id)
@@ -192,4 +192,91 @@ def confirm_order(request, id):
         fail_silently=False
     )
     order.delete()
-    return profile(request)
+    return redirect("/page3/")
+
+
+# Stripe payment logic
+stripe.api_key = settings.STRIPE_TEST_SECRET_KEY
+
+class PaymentCheckoutView(View):
+    def post(self, request, *args, **kwargs):
+        product_id = request.POST.get('product_id')
+        try:
+            product = Product.objects.get(id=product_id)
+        except Product.DoesNotExist:
+            return JsonResponse({'error': 'Product not found'}, status=404)
+
+        checkout_session = stripe.checkout.Session.create(
+            payment_method_types=['card'],
+            line_items=[{
+                'price_data': {
+                    'currency': 'usd',
+                    'product_data': {'name': product.name},
+                    'unit_amount': int(product.price * 100),
+                },
+                'quantity': 1,
+            }],
+            mode='payment',
+            #success_url='http://localhost:8000/pay_success?id='+str(product_id),
+            success_url=request.build_absolute_uri(reverse('pay_success')+"?id="+str(product_id)),
+            cancel_url=request.build_absolute_uri(reverse('pay_cancel')),
+        )
+        return redirect(checkout_session.url, code=303)
+
+
+class SuccessView(View):
+    template_name = 'site_app/payment_success.html'
+    def get(self, request):
+        prod_id = request.GET.get("id")
+        product = Product.objects.get(id=prod_id)
+        order_obj = Order.objects.create(
+            product=product,
+            buyer=request.user,
+            seller=product.owner,
+            buyer_address=request.user.address
+        )
+        product.is_bought = True
+        product.save()
+
+        send_mail(
+            "Product purchased - Trading Treasure",
+            f"Your product {product.name} has been purchased by {request.user.username} for ${product.price}",
+            "tradingtreasure@example.com",
+            [order_obj.seller.email],
+            fail_silently=False
+        )
+        send_mail(
+            "Product purchased - Trading Treasure",
+            f"You purchased {product.name} for ${product.price}",
+            "tradingtreasure@example.com",
+            [request.user.email],
+            fail_silently=False
+        )
+
+        return redirect('/')
+
+
+class CancelView(TemplateView):
+    template_name = 'site_app/payment_cancel.html'
+
+
+@csrf_exempt
+def stripe_webhook(request):
+    payload = request.body
+    sig_header = request.META.get('HTTP_STRIPE_SIGNATURE')
+    endpoint_secret = settings.STRIPE_ENDPOINT_SECRET
+
+    try:
+        event = stripe.Webhook.construct_event(
+            payload, sig_header, endpoint_secret
+        )
+    except ValueError:
+        return JsonResponse({'error': 'Invalid payload'}, status=400)
+    except stripe.error.SignatureVerificationError:
+        return JsonResponse({'error': 'Invalid signature'}, status=400)
+
+    if event['type'] == 'checkout.session.completed':
+        session = event['data']['object']
+        print('✅ Payment succeeded for session:', session['id'])
+
+    return JsonResponse({'status': 'success'}, status=200)

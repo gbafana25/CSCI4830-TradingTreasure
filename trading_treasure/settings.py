@@ -157,7 +157,7 @@ load_dotenv()
 
 STRIPE_TEST_SECRET_KEY = os.getenv('STRIPE_TEST_SECRET_KEY')
 STRIPE_TEST_PUBLIC_KEY = os.getenv('STRIPE_TEST_PUBLIC_KEY')
-STRIPE_WEBHOOK_SECRET='whsec_05fe286c50ccd4d18988ef4bdbd0dcc20fc7a4dabd435b4a4354940435dd2f3f'
+STRIPE_WEBHOOK_SECRET= os.getenv('STRIPE_WEBHOOK_SECRET')
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = 'smtp.gmail.com'
