@@ -182,6 +182,19 @@ def place_order(request, id):
 
     return home(request)
 
+@login_required
+def confirm_order(request, id):
+    order = Order.objects.get(id=id)
+    send_mail(
+        "Order confirmation from "+request.user.username+" - Trading Treasure",
+        "Order confirmation for "+order.product.name,
+        "tradingtreasure@example.com",
+        [order.buyer.email],
+        fail_silently=False
+    )
+    order.delete()
+    return redirect("/page3/")
+
 
 # Stripe payment logic
 stripe.api_key = settings.STRIPE_TEST_SECRET_KEY
