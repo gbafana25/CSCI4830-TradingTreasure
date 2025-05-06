@@ -78,7 +78,7 @@
             						<h2><a href="#">{{ product.name }}</a></h2>
         						</header>
 								<!-- image test-->
-        						<a href="#" class="image fit"><img src={% static 'images/ProductImages/'|add:product.category|add:'.jpg'" %} alt="{{ product.name }}" /></a>
+        						<a class="image fit"><img src={% static 'images/ProductImages/'|add:product.category|add:'.jpg' %} alt="{{ product.name }}" /></a>
         						<p>{{ product.description|truncatewords:20 }}</p> <!-- Truncate description to 20 words -->
         						<ul class="actions special">
             						<li><a href="{% url 'buy-item' product.id %}" class="button">Buy</a></li>
