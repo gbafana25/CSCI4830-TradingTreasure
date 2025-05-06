@@ -97,6 +97,8 @@ def page2(request):
             line1 = product_form.cleaned_data['buyer_address'].split(',')[0]
             addr = Address.objects.filter(address_line1=line1).first()
 
+            
+
             p = Product.objects.create(
                 name=product_form.cleaned_data['name'],
                 price=product_form.cleaned_data['price'],
