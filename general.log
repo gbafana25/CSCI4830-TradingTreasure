@@ -1222,8 +1222,109 @@ Not Found: /static/images/ProductImages/cat1.jpg
 Not Found: /static/images/ProductImages/test category.jpg
 Not Found: /static/images/ProductImages/dfff.jpg
 Watching for file changes with StatReloader
+<<<<<<< Updated upstream
 Watching for file changes with StatReloader
 C:\Users\jwilb\Documents\GitHub\CSCI4830-TradingTreasure\site_app\views.py changed, reloading.
 Watching for file changes with StatReloader
 C:\Users\jwilb\Documents\GitHub\CSCI4830-TradingTreasure\site_app\views.py changed, reloading.
 Watching for file changes with StatReloader
+=======
+Not Found: /static/images/ProductImages/notACatergory.jpg
+Not Found: /static/ProductImages/placeholder.jpg
+Not Found: /static/images/ProductImages/notACatergory.jpg
+Not Found: /static/images/ProductImages/notACatergory.jpg
+Not Found: /static/images/ProductImages/notACatergory.jpg
+Not Found: /static/images/ProductImages/notACatergory.jpg
+Not Found: /static/images/ProductImages/notACatergory.jpg
+Not Found: /static/images/ProductImages/notACatergory.jpg
+Watching for file changes with StatReloader
+Not Found: /static/images/ProductImages/notACatergory.jpg
+Not Found: /static/images/ProductImages/notACatergory.jpg
+Watching for file changes with StatReloader
+Not Found: /static/images/ProductImages/notACatergory.jpg
+Not Found: /static/images/ProductImages/notACatergory.jpg
+Watching for file changes with StatReloader
+Not Found: /static/images/ProductImages/notACatergory.jpg
+Watching for file changes with StatReloader
+Not Found: /static/images/ProductImages/notACatergory.jpg
+Not Found: /static/images/ProductImages/notACatergory.jpg
+Watching for file changes with StatReloader
+Not Found: /static/images/ProductImages/notACatergory.jpg
+Not Found: /static/images/ProductImages/notACatergory.jpg
+Not Found: /static/images/ProductImages/notACatergory.jpg
+Watching for file changes with StatReloader
+Not Found: /static/images/ProductImages/notACatergory.jpg
+Not Found: /static/images/ProductImages/notACatergory.jpg
+Not Found: /static/images/ProductImages/notACatergory.jpg
+C:\Users\jwilb\Documents\GitHub\CSCI4830-TradingTreasure\site_app\views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Not Found: /static/images/ProductImages/placeholder.jpg
+Not Found: /static/images/ProductImages/notACatergory.jpg
+Not Found: /static/images/ProductImages/wobbles.jpg
+Not Found: /static/images/ProductImages/wobbles.jpg
+Internal Server Error: /pay/
+Traceback (most recent call last):
+  File "C:\Users\jwilb\Desktop\my Python Projects\Software Development Projects\TT2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jwilb\Desktop\my Python Projects\Software Development Projects\TT2\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jwilb\Desktop\my Python Projects\Software Development Projects\TT2\.venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jwilb\Desktop\my Python Projects\Software Development Projects\TT2\.venv\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jwilb\Documents\GitHub\CSCI4830-TradingTreasure\site_app\views.py", line 216, in post
+    checkout_session = stripe.checkout.Session.create(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jwilb\Desktop\my Python Projects\Software Development Projects\TT2\.venv\Lib\site-packages\stripe\checkout\_session.py", line 4918, in create
+    cls._static_request(
+  File "C:\Users\jwilb\Desktop\my Python Projects\Software Development Projects\TT2\.venv\Lib\site-packages\stripe\_api_resource.py", line 172, in _static_request
+    return _APIRequestor._global_instance().request(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jwilb\Desktop\my Python Projects\Software Development Projects\TT2\.venv\Lib\site-packages\stripe\_api_requestor.py", line 187, in request
+    rbody, rcode, rheaders = requestor.request_raw(
+                             ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jwilb\Desktop\my Python Projects\Software Development Projects\TT2\.venv\Lib\site-packages\stripe\_api_requestor.py", line 686, in request_raw
+    ) = self._args_for_request_with_retries(
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jwilb\Desktop\my Python Projects\Software Development Projects\TT2\.venv\Lib\site-packages\stripe\_api_requestor.py", line 546, in _args_for_request_with_retries
+    raise error.AuthenticationError(
+stripe._error.AuthenticationError: No API key provided. (HINT: set your API key using "stripe.api_key = <API-KEY>"). You can generate API keys from the Stripe web interface.  See https://stripe.com/api for details, or email support@stripe.com if you have any questions.
+C:\Users\jwilb\Documents\GitHub\CSCI4830-TradingTreasure\trading_treasure\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /pay/
+Traceback (most recent call last):
+  File "C:\Users\jwilb\Desktop\my Python Projects\Software Development Projects\TT2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jwilb\Desktop\my Python Projects\Software Development Projects\TT2\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jwilb\Desktop\my Python Projects\Software Development Projects\TT2\.venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jwilb\Desktop\my Python Projects\Software Development Projects\TT2\.venv\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jwilb\Documents\GitHub\CSCI4830-TradingTreasure\site_app\views.py", line 216, in post
+    checkout_session = stripe.checkout.Session.create(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jwilb\Desktop\my Python Projects\Software Development Projects\TT2\.venv\Lib\site-packages\stripe\checkout\_session.py", line 4918, in create
+    cls._static_request(
+  File "C:\Users\jwilb\Desktop\my Python Projects\Software Development Projects\TT2\.venv\Lib\site-packages\stripe\_api_resource.py", line 172, in _static_request
+    return _APIRequestor._global_instance().request(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jwilb\Desktop\my Python Projects\Software Development Projects\TT2\.venv\Lib\site-packages\stripe\_api_requestor.py", line 187, in request
+    rbody, rcode, rheaders = requestor.request_raw(
+                             ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jwilb\Desktop\my Python Projects\Software Development Projects\TT2\.venv\Lib\site-packages\stripe\_api_requestor.py", line 686, in request_raw
+    ) = self._args_for_request_with_retries(
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jwilb\Desktop\my Python Projects\Software Development Projects\TT2\.venv\Lib\site-packages\stripe\_api_requestor.py", line 546, in _args_for_request_with_retries
+    raise error.AuthenticationError(
+stripe._error.AuthenticationError: No API key provided. (HINT: set your API key using "stripe.api_key = <API-KEY>"). You can generate API keys from the Stripe web interface.  See https://stripe.com/api for details, or email support@stripe.com if you have any questions.
+>>>>>>> Stashed changes

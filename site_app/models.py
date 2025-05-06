@@ -49,7 +49,7 @@ class Product(models.Model):
     def get_image_url(self):
         if self.image:
             return self.image.url
-        return '/productionfiles/images/placeholder.jpg'
+        return '/productionfiles/images/unknown.jpg'
 
 
 class Order(models.Model):
