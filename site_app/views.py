@@ -100,12 +100,18 @@ def page2(request):
             addr = Address.objects.filter(address_line1=line1).first()
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             
 =======
+=======
+>>>>>>> Stashed changes
             if product_form.cleaned_data['category'] not in ApprovedCategorys:
                 itemCategory = 'unknown'
             else:
                 itemCategory = product_form.cleaned_data['category']
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
             p = Product.objects.create(
