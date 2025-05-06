@@ -1224,12 +1224,15 @@ Not Found: /static/images/ProductImages/dfff.jpg
 Watching for file changes with StatReloader
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 Watching for file changes with StatReloader
 C:\Users\jwilb\Documents\GitHub\CSCI4830-TradingTreasure\site_app\views.py changed, reloading.
 Watching for file changes with StatReloader
 C:\Users\jwilb\Documents\GitHub\CSCI4830-TradingTreasure\site_app\views.py changed, reloading.
 Watching for file changes with StatReloader
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 Not Found: /static/images/ProductImages/notACatergory.jpg
@@ -1331,6 +1334,9 @@ Traceback (most recent call last):
     raise error.AuthenticationError(
 stripe._error.AuthenticationError: No API key provided. (HINT: set your API key using "stripe.api_key = <API-KEY>"). You can generate API keys from the Stripe web interface.  See https://stripe.com/api for details, or email support@stripe.com if you have any questions.
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes

@@ -101,8 +101,11 @@ def page2(request):
 
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
             if product_form.cleaned_data['category'] not in ApprovedCategorys:
@@ -110,6 +113,9 @@ def page2(request):
             else:
                 itemCategory = product_form.cleaned_data['category']
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
