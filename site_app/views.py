@@ -91,16 +91,25 @@ def home(request):
 
 
 def page2(request):
+    ApprovedCategorys = ['desktop','graphics card','keyboard','monitor','mouse','mug']
+
     if request.method == 'POST':
         product_form = ProductForm(request.POST)
         if product_form.is_valid():
             line1 = product_form.cleaned_data['buyer_address'].split(',')[0]
             addr = Address.objects.filter(address_line1=line1).first()
 
+
+            if product_form.cleaned_data['category'] not in ApprovedCategorys:
+                itemCategory = 'unknown'
+            else:
+                itemCategory = product_form.cleaned_data['category']
+
+
             p = Product.objects.create(
                 name=product_form.cleaned_data['name'],
                 price=product_form.cleaned_data['price'],
-                category=product_form.cleaned_data['category'],
+                category=itemCategory,
                 owner=request.user,
                 buyer_address=addr,
                 is_bought=False
