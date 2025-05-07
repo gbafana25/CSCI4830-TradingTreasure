@@ -49,3 +49,7 @@ software dev. group project
 - then also install `stripe` and `dotenv` python dependency
 - on the command line run `stripe login`, login through browser (copy link if needed), **for EC2 instance use tradingtreasure gmail account**
 - run `stripe listen --forward-to (address)/webhook`, webhook token value should be updated in settings.py
+
+## Running tests
+- change into `tests-standalone/` directory
+- run `pytest -q run_all_tests.py`
