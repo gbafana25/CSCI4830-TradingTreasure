@@ -51,5 +51,6 @@ software dev. group project
 - run `stripe listen --forward-to (address)/webhook`, webhook token value should be updated in settings.py
 
 ## Running tests
+- make sure `pytest` is installed in the environment: `pip3 install pytest`
 - change into `tests-standalone/` directory
-- run `pytest -q run_all_tests.py`
+- run `pytest`
